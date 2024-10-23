@@ -1,0 +1,98 @@
+import {BooleanInput} from '@angular/cdk/coercion';
+import {NgClass} from '@angular/common';
+import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {Router} from '@angular/router';
+import {Store} from "@ngxs/store";
+import {AuthState} from "@app/pages/auth/store/auth.state";
+import {PrefixSuffixImagePipe} from "@organizo/pipes/prefix-suffix-image.pipe";
+import {UnsubscribeComponent} from "@shared/components/unsubscribe/unsubscribe.component";
+import {GetLogoutAction} from "@app/pages/auth/store/auth.action";
+import {ObjectUtilsService} from "@organizo/services/utils/object-utils.service";
+import {get} from "lodash-es";
+import {MimeTypes} from "@organizo/dx-grid-cell-templates/components/type-with-icon/type-with-icon.component";
+
+@Component({
+  selector: 'user',
+  templateUrl: './user.component.html',
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  exportAs: 'user',
+  standalone: true,
+  imports: [MatButtonModule, MatMenuModule, MatIconModule, NgClass, MatDividerModule, PrefixSuffixImagePipe],
+})
+export class UserComponent extends UnsubscribeComponent implements OnInit, OnDestroy {
+  /* eslint-disable @typescript-eslint/naming-convention */
+  static ngAcceptInputType_showAvatar: BooleanInput;
+  /* eslint-enable @typescript-eslint/naming-convention */
+
+  @Input() showAvatar: boolean = true;
+  user: any;
+
+
+  /**
+   * Constructor
+   */
+  constructor(
+    private _router: Router,
+    private store: Store,
+    private objectUtilsService: ObjectUtilsService,
+  ) {
+    super();
+  }
+
+
+  // -----------------------------------------------------------------------------------------------------
+  // @ Lifecycle hooks
+  // -----------------------------------------------------------------------------------------------------
+
+  get userImageSource() {
+    return this.objectUtilsService.sanitizeFileByURL(
+      this.objectUtilsService.getURLFromBlob(
+        get(this.objectUtilsService.handleContent(get(this.user, 'imagePath'), MimeTypes.PNG), 'blob')
+      )
+    )
+  }
+
+  /**
+   * On init
+   */
+  ngOnInit(): void {
+    this.subscriptions.add(
+      this.store.select(AuthState.authUser).subscribe(user => this.user = user)
+    );
+  }
+
+  // -----------------------------------------------------------------------------------------------------
+  // @ Public methods
+  // -----------------------------------------------------------------------------------------------------
+
+  /**
+   * Update the user status
+   *
+   * @param status
+   */
+  updateUserStatus(status: string): void {
+    // Return if user is not available
+    // if (!this.user) {
+    //   return;
+    // }
+    //
+    // // Update the user
+    // this._userService.update({
+    //   ...this.user,
+    //   status,
+    // }).subscribe();
+  }
+
+  /**
+   * Sign out
+   */
+  signOut(): void {
+    // this._router.navigate(['auth', 'sign-out']).then();
+    this.store.dispatch(new GetLogoutAction(['auth', 'sign-out']));
+  }
+}

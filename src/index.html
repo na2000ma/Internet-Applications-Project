@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Internet Applications</title>
+  <base href="/">
+
+  <!-- Favicon -->
+<!--  <link href="src/favicon.ico" rel="icon" type="image/svg+xml">-->
+
+  <!-- Fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Icon fonts -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Splash screen styles -->
+<!--  <link href="assets/styles/splash-screen.css" rel="stylesheet">-->
+
+</head>
+<body class="mat-typography organizo-app-hidden w-full h-full">
+
+<!-- Splash screen script -->
+<script>
+  // Set user theme
+  const userStickyToolbar = localStorage.getItem('organizo-sticky-toolbar') || 'false';
+  localStorage.setItem('organizo-sticky-toolbar', userStickyToolbar);
+
+  // Set user theme
+  const userTheme = 'theme-vish';
+  if (!document.body.classList.contains(userTheme)) {
+    document.body.classList.add(userTheme);
+  }
+  localStorage.setItem('organizo-theme', userTheme);
+
+  // Set user layout
+  const userLayout = 'dense';
+  if (!document.body.classList.contains(userLayout)) {
+    document.body.classList.add(userLayout);
+  }
+  localStorage.setItem('organizo-layout', userLayout);
+
+  // Set user scheme
+  const userScheme = 'light';
+  let userSchemeVar = 'light';
+  if (!document.body.classList.contains(userSchemeVar || userScheme)) {
+    document.body.classList.add(userSchemeVar || userScheme);
+  }
+  localStorage.setItem('organizo-scheme', userScheme);
+</script>
+
+<!-- Splash screen -->
+<organizo-splash-screen class="w-full h-full">
+  <div class="spinner">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+</organizo-splash-screen>
+
+<!-- App root -->
+<organizo-app>
+  <app-root></app-root>
+</organizo-app>
+</body>
+</html>
+

@@ -1,0 +1,44 @@
+.status-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.btn-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding: 8px;
+  width: 100%;
+  height: 100%;
+  min-width: 100px;
+  max-width: 110px;
+  max-height: 35px;
+}
+
+.btn-active {
+  @apply bg-primary text-primary-200 dark:text-primary-100;
+  mat-icon {
+    @apply text-primary-200 dark:text-primary-100;
+  }
+}
+
+.btn-inactive {
+  background-color: #6E68934D;
+  color: #6E6893;
+
+  mat-icon {
+    @apply text-[#6E6893];
+  }
+}
+
+.btn-expired {
+  background-color: #D300004D;
+  color: #D30000;
+
+  mat-icon {
+    @apply text-[#D30000];
+  }
+}

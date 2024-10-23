@@ -1,0 +1,48 @@
+<div class="flex flex-col flex-auto justify-around items-center sm:justify-center min-w-0 md:p-8">
+  <div class="flex justify-center md:w-full md:max-w-6xl sm:rounded-2xl sm:shadow overflow-hidden sm:bg-card">
+    <div class="sm:w-auto p-12 sm:p-12 md:p-16">
+      <div
+        class="flex flex-col items-center gap-4 max-sm:items-center max-md:items-center max-w-80 sm:w-80 mx-auto sm:mx-0">
+        <!-- Title -->
+        <div class="text-primary text-4xl font-[800] tracking-tight leading-tight">
+          {{ 'auth.signIn' | translate }}
+        </div>
+        <div class="flex flex-col">
+          <form (ngSubmit)="submit(formDef.model)" [formGroup]="formDef.group">
+            <formly-form
+              [fields]="formDef.fields"
+              [form]="formDef.group"
+              [model]="formDef.model"
+              [options]="formDef.options">
+            </formly-form>
+            <div class="flex items-center justify-between">
+              <a
+                [routerLink]="['/forgot-password']"
+                class="text-md font-medium text-primary-500 hover:underline">
+                {{ 'auth.forgotPassword' | translate }}
+              </a>
+            </div>
+            <button
+              [disabled]="!formDef.group.valid || formDef.group.disabled"
+              class="w-full mt-6"
+              color="primary"
+              mat-flat-button
+              type="submit">
+              @if (!formDef.group.disabled) {
+                <span>{{ 'auth.signIn' | translate }}</span>
+              } @else {
+                <mat-progress-spinner
+                  class="!text-primary"
+                  color="primary"
+                  [diameter]="24"
+                  [mode]="'indeterminate'">
+                </mat-progress-spinner>
+              }
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

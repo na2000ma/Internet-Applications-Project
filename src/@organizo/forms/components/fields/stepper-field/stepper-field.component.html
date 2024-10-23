@@ -1,0 +1,38 @@
+<mat-stepper
+  [animationDuration]="props?.animationDuration || 200"
+  [disableRipple]="props?.disableRipple"
+  [headerPosition]="props?.headerPosition"
+  [labelPosition]="props?.labelPosition"
+  [linear]="props?.isLinear"
+  [orientation]="props?.orientation">
+  @for (stepItem of field.fieldGroup; track i; let i = $index; ) {
+    <mat-step [stepControl]="field.form" errorMessage="Error...">
+      <ng-template matStepLabel>
+        <div [class]="stepItem.props?.class">
+          @if (stepItem.props?.icon) {
+            <mat-icon [svgIcon]="stepItem.props?.icon"></mat-icon>
+          }
+          <p class="truncate m-0 text-center max-w-[80px]"> {{ stepItem.props?.label | translate }} </p>
+        </div>
+      </ng-template>
+      <formly-field [field]="stepItem"></formly-field>
+      @if (props?.previousStepText && props.nextStepText) {
+        <div
+          style="display: flex; justify-content: center; align-items: center; padding: 10px 0;">
+          @if (i !== 0) {
+            <button color="accent" mat-raised-button
+                    matStepperPrevious style="margin: 0 10px;">
+              {{ (props?.previousStepText || 'app.previous') | translate }}
+            </button>
+          }
+          @if (i !== field.fieldGroup.length - 1) {
+            <button color="primary" mat-raised-button
+                    matStepperNext style="margin: 0 10px;">
+              {{ (props?.nextStepText || 'app.next') | translate }}
+            </button>
+          }
+        </div>
+      }
+    </mat-step>
+  }
+</mat-stepper>

@@ -1,0 +1,103 @@
+<!-- Item wrapper -->
+<div
+  [class.organizo-vertical-navigation-item-has-subtitle]="!!item.subtitle"
+  [ngClass]="item.classes?.wrapper"
+  class="organizo-vertical-navigation-item-wrapper">
+
+  <div class="organizo-vertical-navigation-item">
+
+    @if (item.icon) {
+      <!-- Icon -->
+      <ng-container>
+        <mat-icon
+          [ngClass]="item.classes?.icon"
+          [svgIcon]="item.icon"
+          class="organizo-vertical-navigation-item-icon"></mat-icon>
+      </ng-container>
+    }
+
+    <!-- Title & Subtitle -->
+    <div class="organizo-vertical-navigation-item-title-wrapper">
+      <div class="organizo-vertical-navigation-item-title">
+                <span [ngClass]="item.classes?.title">
+                    {{ item.title }}
+                </span>
+      </div>
+      @if (item.subtitle) {
+        <ng-container>
+          <div class="organizo-vertical-navigation-item-subtitle">
+                    <span [ngClass]="item.classes?.subtitle">
+      {{ item.subtitle }}
+      </span>
+          </div>
+        </ng-container>
+      }
+    </div>
+
+    @if (item.badge) {
+      <!-- Badge -->
+      <ng-container>
+        <div class="organizo-vertical-navigation-item-badge">
+          <div
+            [ngClass]="item.badge.classes"
+            class="organizo-vertical-navigation-item-badge-content">
+            {{ item.badge.title }}
+          </div>
+        </div>
+      </ng-container>
+    }
+
+  </div>
+
+</div>
+
+@for (item of item.children; track trackByFn) {
+  <ng-container>
+
+    @if ((item.hidden && !item.hidden(item)) || !item.hidden) {
+      <!-- Skip the hidden items -->
+      <ng-container>
+
+        @if (item.type === 'basic') {
+          <!-- Basic -->
+          <ng-container>
+            <organizo-vertical-navigation-basic-item
+              [item]="item"
+              [name]="name"></organizo-vertical-navigation-basic-item>
+          </ng-container>
+        } @else if (item.type === 'collapsable') {
+          <!-- Collapsable -->
+          <ng-container>
+            <organizo-vertical-navigation-collapsable-item
+              [autoCollapse]="autoCollapse"
+              [item]="item"
+              [name]="name"></organizo-vertical-navigation-collapsable-item>
+          </ng-container>
+        } @else if (item.type === 'divider') {
+          <!-- Divider -->
+          <ng-container>
+            <organizo-vertical-navigation-divider-item
+              [item]="item"
+              [name]="name"></organizo-vertical-navigation-divider-item>
+          </ng-container>
+        } @else if (item.type === 'group') {
+          <!-- Group -->
+          <ng-container>
+            <organizo-vertical-navigation-group-item
+              [item]="item"
+              [name]="name"></organizo-vertical-navigation-group-item>
+          </ng-container>
+        } @else if (item.type === 'spacer') {
+          <!-- Spacer -->
+          <ng-container>
+            <organizo-vertical-navigation-spacer-item
+              [item]="item"
+              [name]="name"></organizo-vertical-navigation-spacer-item>
+          </ng-container>
+        }
+
+      </ng-container>
+    }
+
+  </ng-container>
+}

@@ -1,0 +1,81 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    {{ (isInSecurityTemplate ? 'acce.addSecurityTemplate' : 'acce.addDefaultSecurityTemplate') | translate }}
+    <mat-icon (click)="closeDialog()" class="svg" svgIcon="closeDialog"></mat-icon>
+  </div>
+
+  <div class="dialog-content">
+    <form>
+      <mat-radio-group aria-label="Select an option">
+        <mat-radio-button #MatRadioButton (click)="viewChange(true)"
+                          value="1">{{ 'securityTemplate.users' | translate }}
+        </mat-radio-button>
+        <mat-radio-button (click)="viewChange(false)" value="2">{{ 'securityTemplate.groups' | translate }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </form>
+
+    <div class="container-users">
+      <form [formGroup]="usersPrivilegesForm.group" class="container-users-groups-prev">
+        @if (viewUsers) {
+          <div class="cont-user-group">
+            <formly-form [fields]="usersPrivilegesForm.fields" [form]="usersPrivilegesForm.group"
+                         [model]="usersPrivilegesForm.model">
+            </formly-form>
+          </div>
+        } @else {
+          <div class="cont-user-group">
+            <formly-form [fields]="groupsPrivilegesForm.fields" [form]="usersPrivilegesForm.group"
+                         [model]="groupsPrivilegesForm.model">
+            </formly-form>
+          </div>
+        }
+        <div class="cont-features">
+          <formly-form [fields]="featuresForm.fields" [form]="usersPrivilegesForm.group" [model]="featuresForm.model">
+          </formly-form>
+        </div>
+      </form>
+      <div class="w-[95%] mb-3 container-button-form">
+        <button
+          (click)="submit()"
+          color="primary"
+          mat-raised-button
+        >
+          {{ 'app.add' | translate }}
+        </button>
+        <button
+          (click)="resetForm()"
+          color="primary"
+          mat-raised-button
+        >
+          {{ 'auth.reset' | translate }}
+        </button>
+      </div>
+
+      <organizo-grid-wrapper
+        id="grid"
+        [config]="gridDef?.gridConfig"
+        [column-config]="gridDef?.gridConfig?.columnsDef"
+        [data-source]="gridDef?.dataSource$"
+      ></organizo-grid-wrapper>
+
+      <div class="w-[95%] mt-4 container-button-form">
+        <button
+          (click)="submitToServer()"
+          [disabled]="(this.gridDef.dataSource$ | async).length === 0"
+          color="primary"
+          mat-raised-button
+        >
+          {{ 'app.save' | translate }}
+        </button>
+        <button
+          (click)="close()"
+          color="primary"
+          mat-raised-button
+        >
+          {{ 'app.close' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

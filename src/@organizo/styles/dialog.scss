@@ -1,0 +1,43 @@
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  padding: 2% 0;
+  @apply bg-default #{'!important'};
+}
+
+.dialog-content {
+  flex: 8;
+  overflow: auto;
+  padding: 3%;
+}
+
+.dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1% 4%;
+  font-family: Cairo;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  flex: 1;
+  min-height: 4rem;
+  overflow: hidden;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  gap: 2rem;
+  padding: 1% 4%;
+  color: currentColor;
+  overflow: hidden;
+}
+
+.dialog-container mat-icon:hover {
+  cursor: pointer;
+}

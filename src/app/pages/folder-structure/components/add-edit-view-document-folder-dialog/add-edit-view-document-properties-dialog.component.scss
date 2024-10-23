@@ -1,0 +1,7 @@
+:host ::ng-deep .mat-step-label-selected {
+  mat-icon[data-mat-icon-name='folders-field-in'] {
+    svg > path:first-child {
+      fill: var(--organizo-primary-200) !important;
+    }
+  }
+}

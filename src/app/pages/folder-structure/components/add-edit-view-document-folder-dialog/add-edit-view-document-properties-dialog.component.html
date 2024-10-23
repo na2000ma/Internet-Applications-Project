@@ -1,0 +1,100 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    @if (classType === 'Document') {
+      @if (editMode) {
+        {{ 'folderStructure.documentProperties' | translate }}
+      } @else {
+        {{ 'folderStructure.addDocument' | translate }}
+      }
+    } @else {
+      @if (editMode) {
+        {{ 'folderStructure.editFolder' | translate }}
+      } @else {
+        {{ 'folderStructure.addFolder' | translate }}
+      }
+    }
+    <mat-icon (click)="closeDialog()" svgIcon="closeDialog"></mat-icon>
+  </div>
+  <div class="dialog-content">
+    <mat-stepper (selectionChange)="onSelectionChange($event)" [selectedIndex]="selectedIndex">
+      <mat-step>
+        <ng-template matStepLabel>
+          <div class="flex flex-col items-center px-2">
+            <mat-icon [svgIcon]="'general'" class="icon-size-5"></mat-icon>
+            <p class="step-text"> {{ 'acce.general' | translate }} </p>
+          </div>
+        </ng-template>
+        <div class="flex flex-col gap-4">
+          @if (!editMode) {
+            <form [formGroup]="addDocumentOrFolderGeneralForm.group">
+              <formly-form
+                [fields]="addDocumentOrFolderGeneralForm.fields"
+                [form]="addDocumentOrFolderGeneralForm.group"
+                [model]="addDocumentOrFolderGeneralForm.model"
+              >
+              </formly-form>
+            </form>
+          }
+          <br>
+
+          @if (dynamicForm) {
+            <organizo-folder-document-properties (form)="onDynamicFormValueChange($event)"/>
+          }
+        </div>
+
+      </mat-step>
+
+
+
+      @if (classType === 'Document' && editMode) {
+        <mat-step>
+          <ng-template matStepLabel>
+            <div class="flex flex-col items-center px-2">
+              <mat-icon [svgIcon]="'versions'"></mat-icon>
+              <p class="step-text"> {{ 'folderStructure.versions' | translate }} </p>
+            </div>
+          </ng-template>
+          <organizo-document-versions/>
+        </mat-step>
+      }
+
+      <mat-step>
+        <ng-template matStepLabel>
+          <div class="flex flex-col items-center px-2">
+            <mat-icon [svgIcon]="'security'"></mat-icon>
+            <p class="step-text"> {{ 'acce.security' | translate }} </p>
+          </div>
+        </ng-template>
+        <organizo-security-template-class/>
+      </mat-step>
+
+      @if (classType === 'Document') {
+        <mat-step>
+          <ng-template matStepLabel>
+            <div class="flex flex-col items-center px-2">
+              <mat-icon [svgIcon]="'folders-field-in'"></mat-icon>
+              <p class="step-text"> {{ 'folderStructure.foldersFieldIn' | translate }} </p>
+            </div>
+          </ng-template>
+          <organizo-document-folders-field-in
+            [classificationId]="!editMode ?
+             addDocumentOrFolderGeneralForm.model : null"
+            [editMode]="editMode"/>
+        </mat-step>
+      }
+
+    </mat-stepper>
+  </div>
+  <div class="dialog-actions">
+    <button
+      (click)="submit()"
+      [disabled]="inValid || editMode"
+      color="primary"
+      mat-raised-button
+    >
+      {{ 'app.save' | translate }}
+    </button>
+    <button (click)="closeDialog()" color="secondary" mat-raised-button type="button"> {{ 'app.close' | translate }}
+    </button>
+  </div>
+</div>

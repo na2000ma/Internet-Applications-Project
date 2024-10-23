@@ -1,0 +1,31 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    {{ 'app.rename' | translate }}
+    <mat-icon (click)="closeDialog()" svgIcon="closeDialog"></mat-icon>
+  </div>
+
+  <div class="dialog-content">
+    <form (ngSubmit)="submit(formDef.model)" [formGroup]="formDef.group">
+      <formly-form
+        [fields]="formDef.fields"
+        [form]="formDef.group"
+        [model]="formDef.model"
+        [options]="formDef.options">
+      </formly-form>
+      <button #btn type="submit"></button>
+    </form>
+  </div>
+  <div class="dialog-actions">
+    <button
+      (click)="btn.click()"
+      [disabled]="!formDef.group.valid"
+      color="primary"
+      mat-raised-button
+      type="submit"
+    >
+      {{ 'app.save' | translate }}
+    </button>
+    <button (click)="closeDialog()" color="secondary" mat-raised-button type="button"> {{ 'app.close' | translate }}
+    </button>
+  </div>
+</div>

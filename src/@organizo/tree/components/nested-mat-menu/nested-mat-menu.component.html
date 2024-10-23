@@ -1,0 +1,27 @@
+<button
+  [class]="config.class || 'flex items-center'"
+  [disabled]="config.disabled ? config.disabled(item) : false"
+  [matMenuTriggerFor]="subMatMenu" mat-menu-item>
+  @if (config?.icon) {
+    <mat-icon [svgIcon]="config.icon"></mat-icon>
+  }
+  {{ config.name | translate }}
+</button>
+<mat-menu #subMatMenu="matMenu">
+  <ng-template let-item="item" matMenuContent>
+    @for (matItem of config.options; track i; let i = $index) {
+      @if (matItem.visible ? matItem.visible(item) : true) {
+        @if (matItem.hidden ? !matItem.hidden(item) : true) {
+          <button [disabled]="matItem.disabled ? matItem.disabled(item) : false"
+                  (click)="matItem.onClick(item);"
+                  [class]="matItem.class || 'flex items-center'" mat-menu-item>
+            @if (matItem?.icon) {
+              <mat-icon [svgIcon]="matItem.icon"></mat-icon>
+            }
+            {{ matItem.name | translate }}
+          </button>
+        }
+      }
+    }
+  </ng-template>
+</mat-menu>

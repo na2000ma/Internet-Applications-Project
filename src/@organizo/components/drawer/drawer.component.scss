@@ -1,0 +1,133 @@
+/* Variables */
+:root {
+  --organizo-drawer-width: 320px;
+}
+
+organizo-drawer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  width: var(--organizo-drawer-width);
+  min-width: var(--organizo-drawer-width);
+  max-width: var(--organizo-drawer-width);
+  z-index: 48;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .35);
+  @apply bg-default;
+
+  /* Animations */
+  &.organizo-drawer-animations-enabled {
+    transition-duration: 400ms;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-property: visibility, margin-left, margin-right, transform, width, max-width, min-width;
+
+    .organizo-drawer-content {
+      transition-duration: 400ms;
+      transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+      transition-property: width, max-width, min-width;
+    }
+  }
+
+  /* Over mode */
+  &.organizo-drawer-mode-over {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+
+    /* Fixed mode */
+    &.organizo-drawer-fixed {
+      position: fixed;
+    }
+  }
+
+  /* Left position */
+  &.organizo-drawer-position-left {
+
+    /* Side mode */
+    &.organizo-drawer-mode-side {
+      margin-left: calc(var(--organizo-drawer-width) * -1);
+
+      &.organizo-drawer-opened {
+        margin-left: 0;
+      }
+    }
+
+    /* Over mode */
+    &.organizo-drawer-mode-over {
+      left: 0;
+      transform: translate3d(-100%, 0, 0);
+
+      &.organizo-drawer-opened {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    /* Content */
+    .organizo-drawer-content {
+      left: 0;
+    }
+  }
+
+  /* Right position */
+  &.organizo-drawer-position-right {
+
+    /* Side mode */
+    &.organizo-drawer-mode-side {
+      margin-right: calc(var(--organizo-drawer-width) * -1);
+
+      &.organizo-drawer-opened {
+        margin-right: 0;
+      }
+    }
+
+    /* Over mode */
+    &.organizo-drawer-mode-over {
+      right: 0;
+      transform: translate3d(100%, 0, 0);
+
+      &.organizo-drawer-opened {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    /* Content */
+    .organizo-drawer-content {
+      right: 0;
+    }
+  }
+
+  /* Content */
+  .organizo-drawer-content {
+    position: absolute;
+    display: flex;
+    flex: 1 1 auto;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    @apply bg-default;
+  }
+}
+
+/* Overlay */
+.organizo-drawer-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 299;
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  /* Fixed mode */
+  &.organizo-drawer-overlay-fixed {
+    position: fixed;
+  }
+
+  /* Transparent overlay */
+  &.organizo-drawer-overlay-transparent {
+    background-color: transparent;
+  }
+}

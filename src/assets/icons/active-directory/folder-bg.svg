@@ -1,0 +1,16 @@
+<svg fill="none" height="165" viewBox="0 0 476 165" width="476" xmlns="http://www.w3.org/2000/svg">
+  <rect fill="rgba(var(--organizo-primary-200-rgb))" height="164.999" rx="5" width="474.588" x="0.513184"
+        y="0.000976562"/>
+  <rect fill="rgba(var(--organizo-primary-300-rgb))" height="164.999" width="474.588" x="0.513184"
+        y="0.000976562"/>
+  <g opacity="0.5" style="mix-blend-mode:multiply">
+    <path
+      d="M0.513184 0H332.24C332.24 0 283.813 11.6576 178.887 49.3205C73.9613 86.9834 0.513184 24.2119 0.513184 24.2119V0Z"
+      fill="rgba(var(--organizo-primary-300-rgb))"/>
+  </g>
+  <g opacity="0.5" style="mix-blend-mode:screen">
+    <path
+      d="M0.513184 74.4294C0.513184 74.4294 73.9613 129.13 167.587 124.647C261.213 120.163 328.965 50.8437 372.596 29.5927C425.623 3.76571 475.101 29.5926 475.101 29.5926V165H0.513184V74.4294Z"
+      fill="rgba(var(--organizo-primary-400-rgb))"/>
+  </g>
+</svg>

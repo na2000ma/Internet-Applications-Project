@@ -1,0 +1,130 @@
+@if (!child) {
+  <ng-container>
+    <div
+      #trigger="matMenuTrigger"
+      (menuClosed)="triggerChangeDetection()"
+      (menuOpened)="triggerChangeDetection()"
+      [matMenuTriggerFor]="matMenu"
+      [ngClass]="{'organizo-horizontal-navigation-menu-active': trigger.menuOpen,
+'organizo-horizontal-navigation-menu-active-forced': item.active}">
+      <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item}"></ng-container>
+    </div>
+  </ng-container>
+}
+<mat-menu
+  #matMenu="matMenu"
+  [overlapTrigger]="false"
+  class="organizo-horizontal-navigation-menu-panel">
+
+  @for (item of item.children; track trackByFn) {
+    <ng-container>
+
+      @if ((item.hidden && !item.hidden(item)) || !item.hidden) {
+        <!-- Skip the hidden items -->
+        <ng-container>
+
+          @if (item.type === 'basic') {
+            <!-- Basic -->
+            <ng-container>
+              <div
+                [disabled]="item.disabled"
+                class="organizo-horizontal-navigation-menu-item"
+                mat-menu-item>
+                <organizo-horizontal-navigation-basic-item
+                  [item]="item"
+                  [name]="name"></organizo-horizontal-navigation-basic-item>
+              </div>
+            </ng-container>
+          } @else if (item.type === 'aside' || item.type === 'collapsable' || item.type === 'group') {
+            <!-- Branch: aside, collapsable, group -->
+            <ng-container>
+              <div
+                [disabled]="item.disabled"
+                [matMenuTriggerFor]="branch.matMenu"
+                class="organizo-horizontal-navigation-menu-item"
+                mat-menu-item>
+                <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item}"></ng-container>
+                <organizo-horizontal-navigation-branch-item
+                  #branch
+                  [child]="true"
+                  [item]="item"
+                  [name]="name"></organizo-horizontal-navigation-branch-item>
+              </div>
+            </ng-container>
+          } @else if (item.type === 'divider') {
+            <!-- Divider -->
+            <ng-container>
+              <div
+                class="organizo-horizontal-navigation-menu-item"
+                mat-menu-item>
+                <organizo-horizontal-navigation-divider-item
+                  [item]="item"
+                  [name]="name"></organizo-horizontal-navigation-divider-item>
+              </div>
+            </ng-container>
+          }
+
+        </ng-container>
+      }
+
+    </ng-container>
+  }
+
+</mat-menu>
+
+<!-- Item template -->
+<ng-template
+  #itemTemplate
+  let-item>
+
+  <div
+    [class.organizo-horizontal-navigation-item-has-subtitle]="!!item.subtitle"
+    [ngClass]="item.classes?.wrapper"
+    class="organizo-horizontal-navigation-item-wrapper">
+
+    <div
+      [matTooltip]="item.tooltip || ''"
+      [ngClass]="{'organizo-horizontal-navigation-item-disabled': item.disabled,
+                         'organizo-horizontal-navigation-item-active-forced': item.active}"
+      class="organizo-horizontal-navigation-item">
+
+      @if (item.icon) {
+        <!-- Icon -->
+        <ng-container>
+          <mat-icon
+            [ngClass]="item.classes?.icon"
+            [svgIcon]="item.icon"
+            class="organizo-horizontal-navigation-item-icon"></mat-icon>
+        </ng-container>
+      }
+
+      <!-- Title & Subtitle -->
+      <div class="organizo-horizontal-navigation-item-title-wrapper">
+        <div class="organizo-horizontal-navigation-item-title">
+          <span [ngClass]="item.classes?.title">{{ item.title }}</span>
+        </div>
+        @if (item.subtitle) {
+          <ng-container>
+            <div class="organizo-horizontal-navigation-item-subtitle text-hint">
+              <span [ngClass]="item.classes?.subtitle">{{ item.subtitle }}</span>
+            </div>
+          </ng-container>
+        }
+      </div>
+
+      @if (item.badge) {
+        <!-- Badge -->
+        <ng-container>
+          <div class="organizo-horizontal-navigation-item-badge">
+            <div
+              [ngClass]="item.badge.classes"
+              class="organizo-horizontal-navigation-item-badge-content">
+              {{ item.badge.title }}
+            </div>
+          </div>
+        </ng-container>
+      }
+    </div>
+  </div>
+
+</ng-template>

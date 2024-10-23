@@ -1,0 +1,42 @@
+<div class="organizo-horizontal-navigation-wrapper">
+
+  @for (item of navigation; track trackByFn) {
+    <ng-container>
+
+      @if ((item.hidden && !item.hidden(item)) || !item.hidden) {
+        <!-- Skip the hidden items -->
+        <ng-container>
+
+          @if (item.type === 'basic') {
+            <!-- Basic -->
+            <ng-container>
+              <organizo-horizontal-navigation-basic-item
+                [item]="item"
+                [name]="name"
+                class="organizo-horizontal-navigation-menu-item"></organizo-horizontal-navigation-basic-item>
+            </ng-container>
+          } @else if (item.type === 'aside' || item.type === 'collapsable' || item.type === 'group') {
+            <!-- Branch: aside, collapsable, group -->
+            <ng-container>
+              <organizo-horizontal-navigation-branch-item
+                [item]="item"
+                [name]="name"
+                class="organizo-horizontal-navigation-menu-item"></organizo-horizontal-navigation-branch-item>
+            </ng-container>
+          } @else if (item.type === 'spacer') {
+            <!-- Spacer -->
+            <ng-container>
+              <organizo-horizontal-navigation-spacer-item
+                [item]="item"
+                [name]="name"
+                class="organizo-horizontal-navigation-menu-item"></organizo-horizontal-navigation-spacer-item>
+            </ng-container>
+          }
+
+        </ng-container>
+      }
+
+    </ng-container>
+  }
+
+</div>

@@ -1,0 +1,108 @@
+<div class="col-md-12 col-12">
+  @if (props?.type == 'folder') {
+    <div class="drag-drop-container" appDragDrop (dropFile)="onDropFile($event)">
+      @if (!formControl.value) {
+        <mat-icon class="folder-img" svgIcon="folder-bg"></mat-icon>
+      } @else {
+        <div class="folder-img bg-primary-200 opacity-75 h-full">
+          <div
+            #img
+            class="h-full w-full bg-no-repeat bg-contain bg-center"
+            [backgroundImageLoading]="ifStringFormControlValue ? (formControl.value | prefixSuffixImage: props?.type) : formControl.value">
+          </div>
+        </div>
+      }
+      <div
+        [class.gap-3]="isImageChanged"
+        [class.text-warn]="message"
+        class="w-full flex justify-center text-primary bg-default p-2 rounded-b-[0.5rem]"
+      >
+        <p>
+          @if (message) {
+            {{ message }}
+          } @else {
+            click to browse or drag and drop your file
+          }
+        </p>
+        <p [style.visibility]="isImageChanged ? 'visible' : 'hidden'">|</p>
+        <mat-icon
+          [style.visibility]="isImageChanged ? 'visible' : 'hidden'"
+          class="icon-size-5" [color]="message ? 'warn' : 'primary'" svgIcon="trash" (click)="deleteImg()"></mat-icon>
+      </div>
+      <div class="img-chooser-space opacity-75">
+        <button
+          type="button"
+          style="cursor: pointer !important;"
+          mat-raised-button
+          color="primary"
+          (click)="file.click()"
+        >
+          {{ 'folders.chooseImage' | translate }}
+        </button>
+      </div>
+      <input #file type="file" [required]="props?.required" [readOnly]="props?.readonly"
+             (input)="onFileChange($event, props?.type)" hidden>
+    </div>
+  } @else if (props?.type === 'content') {
+    <div class="flex items-center justify-between gap-2 border-and-rounded p-4" appDragDrop
+         (dropFile)="onDropFile($event)">
+      @if (formControl.value) {
+        <div class="flex items-center">
+          <div class="relative flex flex-col">
+            <mat-icon
+              class="icon-size-8 text-hint opacity-50"
+              svgIcon="document">
+            </mat-icon>
+            <div
+              class="absolute left-0 bottom-0 truncate max-w-[50px] w-[75%] px-[1px] rounded text-[9px] font-[200] leading-4 text-white"
+              [matTooltip]="fileType.ext?.toUpperCase()"
+              [class.bg-red-600]="fileType.mimeType === MimeTypes.PDF"
+              [class.bg-blue-600]="fileType.mimeType === MimeTypes.Word"
+              [class.bg-green-600]="fileType.mimeType === MimeTypes.Excel"
+              [class.bg-gray-600]="fileType.mimeType === MimeTypes.Text"
+              [class.bg-amber-600]="fileType.mimeType === MimeTypes.JPEG ||
+                                  fileType.mimeType === MimeTypes.GIF ||
+                                  fileType.mimeType === MimeTypes.BMP ||
+                                  fileType.mimeType === MimeTypes.PNG ||
+                                  fileType.mimeType === MimeTypes.SVG ||
+                                  fileType.mimeType === MimeTypes.TIFF">
+              {{ fileType.ext?.toUpperCase() }}
+            </div>
+          </div>
+          <p> {{ formControl.value.name }}</p>
+        </div>
+      }
+      <mat-icon svgIcon="imgUploader" class="text-primary-400" (click)="file.click()"></mat-icon>
+      <input #file type="file" [required]="props?.required" [readOnly]="props?.readonly"
+             (input)="onFileChange($event, props?.type)" hidden>
+      @if (isImageChanged) {
+        <mat-icon class="icon-size-6" color="primary" svgIcon="trash" (click)="deleteImg()"></mat-icon>
+      }
+    </div>
+  } @else {
+    <div class="flex items-center gap-5 p-4">
+      @if (isDefaultImage(formControl.value)) {
+        @if (props?.type == 'group') {
+          <mat-icon svgIcon="group" class="text-primary-400 icon-size-16"></mat-icon>
+        } @else {
+          <mat-icon svgIcon="user" class="text-primary-400 icon-size-16"></mat-icon>
+        }
+      } @else {
+        <div class="profile-img bg-primary-200 opacity-75">
+          <div
+            #img
+            class="h-full w-full bg-no-repeat bg-contain bg-center"
+            [backgroundImageLoading]="ifStringFormControlValue ? (formControl.value | prefixSuffixImage: props?.type) : formControl.value">
+          </div>
+        </div>
+      }
+      <mat-icon svgIcon="imgUploader" class="text-primary-400" (click)="btn.click()"></mat-icon>
+      <p #btn class="upload-img-txt" (click)="file.click()">UPLOAD IMAGE</p>
+      <input #file type="file" (input)="onFileChange($event, props?.type)" hidden>
+      <mat-icon
+        [style.visibility]="isImageChanged ? 'visible' : 'hidden'"
+        class="icon-size-6" color="primary" svgIcon="trash" (click)="deleteImg()"></mat-icon>
+    </div>
+  }
+
+</div>

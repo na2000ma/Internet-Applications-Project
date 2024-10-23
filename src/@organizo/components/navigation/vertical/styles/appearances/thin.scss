@@ -1,0 +1,99 @@
+/* Variables */
+:root {
+  --organizo-vertical-navigation-thin-width: 80px;
+}
+
+organizo-vertical-navigation {
+
+  /* Thin appearance overrides */
+  &.organizo-vertical-navigation-appearance-thin {
+    width: var(--organizo-vertical-navigation-thin-width);
+    min-width: var(--organizo-vertical-navigation-thin-width);
+    max-width: var(--organizo-vertical-navigation-thin-width);
+
+    /* Left positioned */
+    &.organizo-vertical-navigation-position-left {
+
+      &.organizo-vertical-navigation-mode-side {
+        margin-left: calc(var(--organizo-vertical-navigation-thin-width) * -1);
+      }
+
+      &.organizo-vertical-navigation-opened {
+        margin-left: 0;
+      }
+    }
+
+    /* Right positioned */
+    &.organizo-vertical-navigation-position-right {
+
+      &.organizo-vertical-navigation-mode-side {
+        margin-right: calc(var(--organizo-vertical-navigation-thin-width) * -1);
+      }
+
+      &.organizo-vertical-navigation-opened {
+        margin-right: 0;
+      }
+
+      .organizo-vertical-navigation-aside-wrapper {
+        left: auto;
+        right: var(--organizo-vertical-navigation-thin-width);
+      }
+    }
+
+    /* Wrapper */
+    .organizo-vertical-navigation-wrapper {
+
+      /* Content */
+      .organizo-vertical-navigation-content {
+
+        > organizo-vertical-navigation-aside-item,
+        > organizo-vertical-navigation-basic-item {
+          flex-direction: column;
+          justify-content: center;
+          height: 64px;
+          min-height: 64px;
+          max-height: 64px;
+          padding: 0 16px;
+
+          .organizo-vertical-navigation-item-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .organizo-vertical-navigation-item {
+              justify-content: center;
+              padding: 12px;
+              border-radius: 4px;
+
+              .organizo-vertical-navigation-item-icon {
+                margin: 0;
+              }
+
+              .organizo-vertical-navigation-item-arrow,
+              .organizo-vertical-navigation-item-badge-content,
+              .organizo-vertical-navigation-item-title-wrapper {
+                display: none;
+              }
+            }
+          }
+        }
+
+        > organizo-vertical-navigation-collapsable-item {
+          display: none
+        }
+
+        > organizo-vertical-navigation-group-item {
+
+          > .organizo-vertical-navigation-item-wrapper {
+            display: none
+          }
+        }
+      }
+    }
+
+    /* Aside wrapper */
+    .organizo-vertical-navigation-aside-wrapper {
+      left: var(--organizo-vertical-navigation-thin-width);
+    }
+  }
+}

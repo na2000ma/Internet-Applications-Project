@@ -1,0 +1,44 @@
+<div [matTooltip]="to?.matTooltip" class="flex items-center justify-center h-full">
+  @if (to?.isMatMenu) {
+    <button
+      mat-menu-item
+      (click)="handleMatIconClick($event)"
+      [matMenuTriggerFor]="menu"
+      [ngClass]="to?.isMatMenu ? 'flex  items-center' : 'text-primary'"
+      [hidden]="isFunction(to?.hidden) ? to?.hidden(rowData) : to?.hidden"
+      [disabled]="isFunction(to?.disabled) ? to?.disabled(rowData) : to?.disabled"
+    >
+      {{ to?.label | translate }}
+      @if (to?.icon) {
+        <mat-icon [svgIcon]="to?.icon"></mat-icon>
+      }
+    </button>
+  } @else {
+    <mat-icon
+      (click)="handleMatIconClick($event)"
+      [matMenuTriggerFor]="menu"
+      [svgIcon]="to?.svgIcon"
+      class="cursor-pointer"
+      color="primary"
+    ></mat-icon>
+  }
+</div>
+<mat-menu #menu="matMenu" (click)="$event.preventDefault(); $event.stopPropagation();">
+  @for (option of to?.options; track i; let i = $index) {
+    @if (!option?.isMatMenu) {
+      <button
+        mat-menu-item
+        [ngClass]="option?.icon ? 'flex items-center' : 'text-primary'"
+        [hidden]="isFunction(option?.hidden) ? option?.hidden(rowData) : option?.hidden"
+        [disabled]="isFunction(option?.disabled) ? option?.disabled(rowData) : option?.disabled"
+        (click)="handleClick(i)">
+        {{ option?.label | translate }}
+        @if (option?.icon) {
+          <mat-icon [class]="'icon-size-5'" [svgIcon]="option?.icon"></mat-icon>
+        }
+      </button>
+    } @else {
+      <organizo-mat-menu [config]="option" [rowData]="rowData"/>
+    }
+  }
+</mat-menu>

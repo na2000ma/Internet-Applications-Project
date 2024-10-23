@@ -1,0 +1,33 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    {{ (isFolder ? 'folderStructure.viewFolderProperty' : editMode ? 'folderStructure.editDocument' : 'folderStructure.viewDocumentProperty') | translate }}
+    <mat-icon (click)="closeDialog()" svgIcon="closeDialog"></mat-icon>
+  </div>
+
+  <div class="dialog-content">
+    <organizo-folder-document-properties [inFolder]="isFolder" (form)="onDynamicFormValueChange($event)"/>
+    @if (editMode) {
+      <form [formGroup]="generalForm.group">
+        <formly-form
+          [fields]="generalForm.fields"
+          [form]="generalForm.group"
+          [model]="generalForm.model"
+          [options]="generalForm.options">
+        </formly-form>
+      </form>
+    }
+  </div>
+  <div class="dialog-actions">
+    <button
+      (click)="editMode ? editDocumentOrFolder() : editFolderOrDocumentProperties(formDef?.model)"
+      type="submit"
+      [disabled]="formDef.group.invalid"
+      color="primary"
+      mat-raised-button
+    >
+      {{ 'app.save' | translate }}
+    </button>
+    <button (click)="closeDialog()" color="secondary" mat-raised-button type="button"> {{ 'app.close' | translate }}
+    </button>
+  </div>
+</div>

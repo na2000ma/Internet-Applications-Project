@@ -1,0 +1,194 @@
+/* Variables */
+:root {
+  --organizo-vertical-navigation-width: 280px;
+  --organizo-vertical-navigation-dense-width: 80px;
+}
+
+organizo-vertical-navigation {
+
+  /* Dense appearance overrides */
+  &.organizo-vertical-navigation-appearance-dense {
+
+    &:not(.organizo-vertical-navigation-mode-over) {
+      width: var(--organizo-vertical-navigation-dense-width);
+      min-width: var(--organizo-vertical-navigation-dense-width);
+      max-width: var(--organizo-vertical-navigation-dense-width);
+
+      /* Left positioned */
+      &.organizo-vertical-navigation-position-left {
+
+        /* Side mode */
+        &.organizo-vertical-navigation-mode-side {
+          margin-left: calc(var(--organizo-vertical-navigation-dense-width) * -1);
+        }
+
+        /* Opened */
+        &.organizo-vertical-navigation-opened {
+          margin-left: 0;
+        }
+      }
+
+      /* Right positioned */
+      &.organizo-vertical-navigation-position-right {
+
+        /* Side mode */
+        &.organizo-vertical-navigation-mode-side {
+          margin-right: calc(var(--organizo-vertical-navigation-dense-width) * -1);
+        }
+
+        /* Opened */
+        &.organizo-vertical-navigation-opened {
+          margin-right: 0;
+        }
+
+        /* Aside wrapper */
+        .organizo-vertical-navigation-aside-wrapper {
+          left: auto;
+          right: var(--organizo-vertical-navigation-dense-width);
+        }
+
+        &.organizo-vertical-navigation-hover {
+
+          .organizo-vertical-navigation-aside-wrapper {
+            left: auto;
+            right: var(--organizo-vertical-navigation-width);
+          }
+        }
+      }
+    }
+
+    /* Wrapper */
+    .organizo-vertical-navigation-wrapper {
+
+      /* Content */
+      .organizo-vertical-navigation-content {
+
+        organizo-vertical-navigation-aside-item,
+        organizo-vertical-navigation-basic-item,
+        organizo-vertical-navigation-collapsable-item,
+        organizo-vertical-navigation-group-item {
+
+          .organizo-vertical-navigation-item-wrapper {
+
+            .organizo-vertical-navigation-item {
+              width: calc(var(--organizo-vertical-navigation-dense-width) - 24px);
+              min-width: calc(var(--organizo-vertical-navigation-dense-width) - 24px);
+              max-width: calc(var(--organizo-vertical-navigation-dense-width) - 24px);
+
+              .organizo-vertical-navigation-item-arrow,
+              .organizo-vertical-navigation-item-badge,
+              .organizo-vertical-navigation-item-title-wrapper {
+                transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+              }
+            }
+          }
+        }
+
+        organizo-vertical-navigation-group-item {
+
+          &:first-of-type {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+
+    &:not(.organizo-vertical-navigation-hover):not(.organizo-vertical-navigation-mode-over) {
+
+      /* Wrapper */
+      .organizo-vertical-navigation-wrapper {
+
+        /* Content */
+        .organizo-vertical-navigation-content {
+
+          .organizo-vertical-navigation-item-wrapper {
+
+            .organizo-vertical-navigation-item {
+              padding: 10px 16px;
+
+              .organizo-vertical-navigation-item-arrow,
+              .organizo-vertical-navigation-item-badge,
+              .organizo-vertical-navigation-item-title-wrapper {
+                white-space: nowrap;
+                opacity: 0;
+              }
+            }
+          }
+
+          organizo-vertical-navigation-collapsable-item {
+
+            .organizo-vertical-navigation-item-children {
+              display: none;
+            }
+          }
+
+          organizo-vertical-navigation-group-item {
+
+            > .organizo-vertical-navigation-item-wrapper {
+
+              .organizo-vertical-navigation-item {
+
+                &:before {
+                  content: '';
+                  position: absolute;
+                  top: 20px;
+                  width: 23px;
+                  border-top-width: 2px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    /* Aside wrapper */
+    .organizo-vertical-navigation-aside-wrapper {
+      left: var(--organizo-vertical-navigation-dense-width);
+    }
+
+    /* Hover */
+    &.organizo-vertical-navigation-hover {
+
+      .organizo-vertical-navigation-wrapper {
+        width: var(--organizo-vertical-navigation-width);
+
+        .organizo-vertical-navigation-content {
+
+          .organizo-vertical-navigation-item-wrapper {
+
+            .organizo-vertical-navigation-item {
+              width: calc(var(--organizo-vertical-navigation-width) - 24px);
+              min-width: calc(var(--organizo-vertical-navigation-width) - 24px);
+              max-width: calc(var(--organizo-vertical-navigation-width) - 24px);
+
+              .organizo-vertical-navigation-item-arrow,
+              .organizo-vertical-navigation-item-badge,
+              .organizo-vertical-navigation-item-title-wrapper {
+                white-space: nowrap;
+                animation: removeWhiteSpaceNoWrap 1ms linear 350ms;
+                animation-fill-mode: forwards;
+              }
+            }
+          }
+        }
+      }
+
+      .organizo-vertical-navigation-aside-wrapper {
+        left: var(--organizo-vertical-navigation-width);
+      }
+    }
+  }
+}
+
+@keyframes removeWhiteSpaceNoWrap {
+  0% {
+    white-space: nowrap
+  }
+  99% {
+    white-space: nowrap
+  }
+  100% {
+    white-space: normal;
+  }
+}

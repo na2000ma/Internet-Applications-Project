@@ -1,0 +1,75 @@
+<dx-data-grid
+  #grid
+  (onExporting)="onExportingGrid($event)"
+  (onInitialized)="onGridReady($event)"
+  (onRowClick)="onRowClick($event)"
+  (onRowDblClick)="onRowDblClick($event)"
+  [allowColumnResizing]="config?.allowColumnResizing || false"
+  [columnAutoWidth]="config?.columnAutoWidth || false"
+  [dataSource]="dataSrc$ | async"
+  [hoverStateEnabled]="config?.hoverStateEnabled || false"
+  [ngClass]="themeName"
+  [rowAlternationEnabled]="config?.rowAlternationEnabled || false"
+  [showBorders]="config?.showBorders || false"
+  [showColumnHeaders]="config?.showColumnHeaders || false"
+  [showColumnLines]="config?.showColumnLines || false"
+  [showRowLines]="config?.showRowLines || false"
+>
+  <dxo-export [enabled]="config?.enableExport || false"></dxo-export>
+
+  @for (col of colConfig; let i = $index; track i) {
+    <dxi-column
+      [allowExporting]="col?.allowExporting || true"
+      [caption]="col?.caption | translate"
+      [cellTemplate]="col?.cellTemplate"
+      [dataField]="getDataField(col?.dataField) | async"
+      [headerCellTemplate]="col?.headerTemplate"
+      [width]="col?.width"
+    ></dxi-column>
+  }
+  <!--  <dxo-selection-->
+  <!--    selectAllMode="allPages"-->
+  <!--    [showCheckBoxesMode]="'always'"-->
+  <!--    mode="multiple"-->
+  <!--  ></dxo-selection>-->
+  <dxo-master-detail
+    [enabled]="config?.enableDetails || false"
+    [template]="config?.details?.templateName || 'CDDG-details'">
+  </dxo-master-detail>
+  <dxo-column-fixing [enabled]="config?.enableColumnFixed || false"></dxo-column-fixing>
+  <dxo-column-chooser [enabled]="config?.enableColumnChooser || false"></dxo-column-chooser>
+  <dxo-filter-row [visible]="config?.enableGridFilter || false"></dxo-filter-row>
+  <dxo-search-panel [visible]="config?.enableSearchPanel || false"></dxo-search-panel>
+  <dxo-group-panel [visible]="config?.enableColumnsGrouping || false"></dxo-group-panel>
+  <div *dxTemplate="let item of (config?.details?.templateName || 'CDDG-details')">
+    <app-cell-template-wrapper [component-name]="config?.details?.templateRef" [row-data]="item"
+                               [to]="config?.details?.templateOptions"></app-cell-template-wrapper>
+  </div>
+  @for (template of templateColumn; let i = $index; track i) {
+    <div *dxTemplate="let headerItem of template?.headerName">
+      <div>
+        <app-cell-template-wrapper [component-name]="template?.headerRef"
+                                   [row-data]="headerItem" [to]="template?.templateOptions">
+        </app-cell-template-wrapper>
+      </div>
+    </div>
+    <div *dxTemplate="let item of template?.name">
+      <div>
+        <app-cell-template-wrapper [component-name]="template?.componentRef"
+                                   [row-data]="item" [to]="template?.templateOptions">
+        </app-cell-template-wrapper>
+      </div>
+    </div>
+  }
+</dx-data-grid>
+@if (config?.enablePagination) {
+  <mat-paginator
+    [length]="paginationLength"
+    [pageSize]="5"
+    [pageIndex]="0"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    [showFirstLastButtons]="true"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
+}

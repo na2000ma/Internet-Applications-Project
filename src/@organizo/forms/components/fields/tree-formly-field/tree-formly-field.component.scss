@@ -1,0 +1,48 @@
+
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+/* The mat-form-field-wrapper is used to contain both the label and tree component */
+.mat-form-field-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 1%;
+  border: 2px solid;
+  @apply border-slate-300 dark:border-slate-500 #{'!important'};
+  border-radius: 5px;
+  transition: border-color 0.3s;
+  height: 27vh;
+}
+
+/* Style the label */
+.floating-label {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  color: var(--mdc-outlined-text-field-hover-label-text-color) #{'!important'};
+  background-color: var(--organizo-bg-default) #{'!important'};
+  transition: all 0.2s ease;
+  padding: 0 4px;
+  pointer-events: none;
+}
+
+/* Tree component styles (you can customize as per your needs) */
+.organizo-tree {
+  overflow: auto;
+  max-height: 200px;
+  scroll-behavior: smooth;
+  //scrollbar-width: thin;
+  padding-top: 3% !important;
+  height: 27vh;
+}
+
+:host ::ng-deep {
+  .selected-tree-node, .mat-tree-node:hover, .context-tree-node {
+    width: fit-content !important;
+  }
+}
+
+

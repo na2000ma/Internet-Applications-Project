@@ -1,0 +1,154 @@
+<!-- Item wrapper -->
+<div
+  [class.organizo-horizontal-navigation-item-has-subtitle]="!!item.subtitle"
+  [ngClass]="item.classes?.wrapper"
+  class="organizo-horizontal-navigation-item-wrapper">
+
+  @if (item.link && !item.externalLink && !item.function && !item.disabled) {
+    <!-- Item with an internal link -->
+    <ng-container>
+      <div
+        [fragment]="item.fragment ?? null"
+        [matTooltip]="item.tooltip || ''"
+        [ngClass]="{'organizo-horizontal-navigation-item-active-forced': item.active}"
+        [preserveFragment]="item.preserveFragment ?? false"
+        [queryParamsHandling]="item.queryParamsHandling ?? null"
+        [queryParams]="item.queryParams ?? null"
+        [routerLinkActiveOptions]="isActiveMatchOptions"
+        [routerLinkActive]="'organizo-horizontal-navigation-item-active'"
+        [routerLink]="[item.link]"
+        class="organizo-horizontal-navigation-item">
+        <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+      </div>
+    </ng-container>
+  }
+
+  @if (item.link && item.externalLink && !item.function && !item.disabled) {
+    <!-- Item with an external link -->
+    <ng-container>
+      <a
+        [href]="item.link"
+        [matTooltip]="item.tooltip || ''"
+        [target]="item.target || '_self'"
+        class="organizo-horizontal-navigation-item">
+        <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+      </a>
+    </ng-container>
+  }
+
+  @if (!item.link && item.function && !item.disabled) {
+    <!-- Item with a function -->
+    <ng-container>
+      <div
+        (click)="item.function(item)"
+        [matTooltip]="item.tooltip || ''"
+        [ngClass]="{'organizo-horizontal-navigation-item-active-forced': item.active}"
+        class="organizo-horizontal-navigation-item">
+        <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+      </div>
+    </ng-container>
+  }
+
+  @if (item.link && !item.externalLink && item.function && !item.disabled) {
+    <!-- Item with an internal link and function -->
+    <ng-container>
+      <div
+        (click)="item.function(item)"
+        [fragment]="item.fragment ?? null"
+        [matTooltip]="item.tooltip || ''"
+        [ngClass]="{'organizo-horizontal-navigation-item-active-forced': item.active}"
+        [preserveFragment]="item.preserveFragment ?? false"
+        [queryParamsHandling]="item.queryParamsHandling ?? null"
+        [queryParams]="item.queryParams ?? null"
+        [routerLinkActiveOptions]="isActiveMatchOptions"
+        [routerLinkActive]="'organizo-horizontal-navigation-item-active'"
+        [routerLink]="[item.link]"
+        class="organizo-horizontal-navigation-item">
+        <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+      </div>
+    </ng-container>
+  }
+
+  @if (item.link && item.externalLink && item.function && !item.disabled) {
+    <!-- Item with an external link and function -->
+    <ng-container>
+      <a
+        (click)="item.function(item)"
+        [href]="item.link"
+        [matTooltip]="item.tooltip || ''"
+        [target]="item.target || '_self'"
+        class="organizo-horizontal-navigation-item"
+        mat-menu-item>
+        <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+      </a>
+    </ng-container>
+  }
+
+  @if (!item.link && !item.function && !item.disabled) {
+    <!-- Item with a no link and no function -->
+    <ng-container>
+      <div
+        [matTooltip]="item.tooltip || ''"
+        [ngClass]="{'organizo-horizontal-navigation-item-active-forced': item.active}"
+        class="organizo-horizontal-navigation-item">
+        <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+      </div>
+    </ng-container>
+  }
+
+  @if (item.disabled) {
+    <!-- Item is disabled -->
+    <ng-container>
+      <div class="organizo-horizontal-navigation-item organizo-horizontal-navigation-item-disabled">
+        <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+      </div>
+    </ng-container>
+  }
+
+</div>
+
+<!-- Item template -->
+<ng-template #itemTemplate>
+
+  @if (item.icon) {
+    <!-- Icon -->
+    <ng-container>
+      <mat-icon
+        [ngClass]="item.classes?.icon"
+        [svgIcon]="item.icon"
+        class="organizo-horizontal-navigation-item-icon"></mat-icon>
+    </ng-container>
+  }
+
+  <!-- Title & Subtitle -->
+  <div class="organizo-horizontal-navigation-item-title-wrapper">
+    <div class="organizo-horizontal-navigation-item-title">
+            <span [ngClass]="item.classes?.title">
+                {{ item.title }}
+            </span>
+    </div>
+    @if (item.subtitle) {
+      <ng-container>
+        <div class="organizo-horizontal-navigation-item-subtitle text-hint">
+                <span [ngClass]="item.classes?.subtitle">
+    {{ item.subtitle }}
+    </span>
+        </div>
+      </ng-container>
+    }
+  </div>
+
+  @if (item.badge) {
+    <!-- Badge -->
+    <ng-container>
+      <div class="organizo-horizontal-navigation-item-badge">
+        <div
+          [ngClass]="item.badge.classes"
+          class="organizo-horizontal-navigation-item-badge-content">
+          {{ item.badge.title }}
+        </div>
+      </div>
+    </ng-container>
+  }
+
+</ng-template>

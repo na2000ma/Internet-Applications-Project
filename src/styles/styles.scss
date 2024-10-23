@@ -1,0 +1,85 @@
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Import/write your custom styles here.
+/*  @ Styles from this file will override 'vendors.scss' and Organizo's base styles.
+/* ----------------------------------------------------------------------------------------------------- */
+@import '../@organizo/styles/dialog';
+
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  padding: 0;
+}
+
+formly-field-mat-input {
+  width: 100%;
+}
+
+.border-and-rounded {
+  @apply rounded-full border-[1px] #{'!important'};
+  border-color: var(--organizo-mat-icon) !important;
+}
+
+// Background Image Loading
+.background-image-container {
+  opacity: 1;
+  transition: all 250ms ease-in-out;
+}
+
+.background-image-loading {
+  opacity: 0;
+}
+
+.fixed-space {
+  background-color: var(--organizo-bg-default);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+//// Scroll
+//::-webkit-scrollbar {
+//  width: 12px !important;
+//  @apply bg-gray-300 dark:bg-gray-900 #{'!important'};
+//  border-radius: 3px !important;
+//  transition: all 0.25s linear !important;
+//}
+//
+//::-webkit-scrollbar:hover {
+//  @apply bg-gray-300 dark:bg-gray-900 #{'!important'};
+//}
+//
+//::-webkit-scrollbar-thumb {
+//  border-radius: 3px !important;
+//  @apply bg-gray-900 dark:bg-gray-200 #{'!important'};
+//  transition: all 0.25s linear !important;
+//}
+//
+//::-webkit-scrollbar-thumb:hover {
+//  @apply bg-gray-800 dark:bg-gray-300 #{'!important'};
+//}
+//
+//::-webkit-scrollbar-thumb:active {
+//  @apply bg-gray-800 dark:bg-gray-300 #{'!important'};
+//}
+
+app-grid-wrapper {
+  width: -webkit-fill-available !important;
+  height: fit-content;
+}
+
+
+h1 {
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+formly-field {
+  @apply w-1/2 #{'!important'};
+}
+
+.access-denied {
+  svg > path[access="denied"] {
+    fill: #9d1919 !important;
+  }
+}
+

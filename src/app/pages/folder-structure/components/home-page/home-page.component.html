@@ -1,0 +1,80 @@
+<div #parentElement
+     class="w-full relative flex">
+
+  <div #drawerSpace class="flex justify-start">
+    @if (!docsTreeDrawer.opened) {
+      <button
+        (click)="toggleDrawer();"
+        class="print:hidden"
+        mat-icon-button
+        [matTooltip]="'openTree'"
+      >
+        <mat-icon [svgIcon]="'organizo-outline-icons:arrow-right'"/>
+      </button>
+    } @else {
+      <button
+        (click)="toggleDrawer();"
+        class="print:hidden"
+        [matTooltip]="'closeTree'"
+        mat-icon-button
+      >
+        <mat-icon [svgIcon]="'organizo-outline-icons:arrow-left'"/>
+      </button>
+    }
+    <organizo-drawer
+      #docsTreeDrawer
+      [class.hidden]="!docsTreeDrawer.opened"
+      [mode]="'side'"
+      [name]="'docsTreeDrawer'"
+      [position]="'left'"
+      class="w-screen min-w-screen sm:w-100 sm:min-w-100">
+      <div class="flex justify-between fixed-space p-4">
+        <div class="flex justify-center items-center gap-1">
+          <mat-icon svgIcon="organizo-outline-icons:folder"></mat-icon>
+          <h1>{{ 'folderStructure.folderTree' | translate }}</h1>
+        </div>
+        <button
+          (click)="openAddFolderDialog()"
+          [disabled]="!canAddFolder"
+        >
+          <mat-icon [class.text-primary]="canAddFolder" svgIcon="organizo-outline-icons:plus1"></mat-icon>
+        </button>
+      </div>
+      <organizo-tree [(selectedNode)]="treeDef.selectedNode" [config]="treeDef" class="w-[400px]"/>
+    </organizo-drawer>
+  </div>
+  @if (!(documents$ | async)) {
+    <div class="w-full h-full flex flex-col justify-center items-center">
+      <mat-icon
+        [class.access-denied]="accessDenied"
+        class="icon-size-[20rem]"
+        svgIcon="without-documents"
+      ></mat-icon>
+      <p>{{ (accessDenied ? 'app.accessDenied' : 'folderStructure.withoutDocuments') | translate }}</p>
+    </div>
+  }
+  <div #docsListElement
+       [class.border-r-warn]="warnedBorder"
+       [class.hidden]="!(documents$ | async)"
+       [ngStyle]="(docsTreeDrawer.opened || !(viewContent$ | async)) ? {width: '100%'} : {width: '40%'}"
+       class="border-r-2 h-full"
+       id="document-list-element"
+       style="min-width: 300px;"
+  >
+    <organizo-documents [drawer]="docsTreeDrawer"/>
+  </div>
+
+  <div
+    [class.hidden]="!(viewContent$ | async)"
+    [style.width]="documentContentWidth + (+drawerSpace.offsetWidth)"
+    class="bg-primary-50 dark:bg-primary-900 h-full"
+    style="width: 60%; min-width: 400px"
+  >
+    <organizo-document-content/>
+  </div>
+
+</div>
+
+
+
+

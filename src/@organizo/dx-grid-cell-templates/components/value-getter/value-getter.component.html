@@ -1,0 +1,4 @@
+<div [class]="to?.class + 'truncate' || 'flex items-center justify-center truncate'"
+     [matTooltip]="to?.valueGetter(cellData, rowData) || cellData">
+  {{ to?.valueGetter(cellData, rowData) }}
+</div>

@@ -1,0 +1,9 @@
+<div class="flex items-center justify-center h-full">
+  <button
+    (click)="handleClick($event)"
+    [class]="to?.class"
+    color="primary" mat-raised-button
+  >
+    {{ to?.label | translate }}
+  </button>
+</div>

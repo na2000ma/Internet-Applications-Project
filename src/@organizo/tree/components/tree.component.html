@@ -1,0 +1,152 @@
+<mat-tree [dataSource]="nestedDataSource"
+          [treeControl]="nestedTreeControl"
+          class="app-tree bg-secondary m-1 rounded-[10px]">
+
+  <!-- Without children node -->
+  <mat-tree-node *matTreeNodeDef="let node">
+    <li class="w-full">
+      <div
+        #matMenuTrigger="matMenuTrigger"
+        (click)="selectNode(node, nodeTemplate)"
+        (contextmenu)="contextMenuTrigger(node, matMenuTrigger, $event)"
+        (mouseenter)="matMenuTrigger._handleClick = emptyFun"
+        [class.context-node]="_config.customizeId(contextNode) === _config.customizeId(node)"
+        [class.selected-tree-node]="_config.customizeId(selectedNode) === _config.customizeId(node)"
+        [matMenuTriggerData]="{item: node}"
+        [matMenuTriggerFor]="matMenu"
+        [class]="_config.setClass(node)"
+        #nodeTemplate
+        [id]="'node-id-' + _config.customizeId(node)"
+        class="mat-tree-node flex items-center justify-between gap-[3px] hover:bg-primary-100 hover:bg-opacity-50"
+      >
+        <div class="flex items-center gap-[3px]">
+          <button
+            class="invisible"
+            mat-icon-button
+            matTreeNodeToggle>
+            <mat-icon class="mat-icon-rtl-mirror text-primary-200">
+              {{ _config.customizeIsExpanded(node) ? 'expand_more' : 'chevron_right' }}
+            </mat-icon>
+          </button>
+
+          @if (_config.withCheckBox) {
+            <mat-checkbox
+              [checked]="_config.customizeIsChecked(node)"
+              (click)="$event.preventDefault(); $event.stopPropagation()"
+              (change)="onNodeCheckedChange(node, $event)">
+            </mat-checkbox>
+          }
+
+
+          <div class="flex items-center gap-[3px]">
+            <mat-icon [svgIcon]="_config.customizeIcon(node)"></mat-icon>
+            <p [matTooltip]="_config.customizeText(node)"
+               class="truncate max-w-[100px]">{{ _config.customizeText(node) }}</p>
+            <mat-icon
+              class="text-primary"
+              [class.invisible]="!_config.customizeOnHold(node)"
+              [svgIcon]="_config.customizeOnHold(node) ? 'on-hold' : ''">
+            </mat-icon>
+          </div>
+        </div>
+        @if (_config.menuButton && _config.customizeId(selectedNode) === _config.customizeId(node)) {
+          <mat-icon
+            (click)="$event.preventDefault();"
+            [matMenuTriggerFor]="matMenu"
+            [matMenuTriggerData]="{item: node}"
+            class="text-accent menu-toggle-icon"
+            svgIcon="options">
+          </mat-icon>
+        }
+      </div>
+    </li>
+  </mat-tree-node>
+
+  <!-- With children node -->
+  <mat-nested-tree-node *matTreeNodeDef="let node;when: _config?.hasChildren">
+    <li class="w-full">
+      <div
+        #matMenuTrigger="matMenuTrigger"
+        (click)="selectNode(node, nodeTemplate);"
+        (contextmenu)="contextMenuTrigger(node, matMenuTrigger, $event)"
+        (mouseenter)="matMenuTrigger._handleClick = emptyFun"
+        [class.context-node]="_config.customizeId(contextNode) === _config.customizeId(node)"
+        [class.selected-tree-node]="_config.customizeId(selectedNode) === _config.customizeId(node)"
+        [matMenuTriggerData]="{item: node}"
+        [matMenuTriggerFor]="matMenu"
+        [class]="_config.setClass(node)"
+        #nodeTemplate
+        [id]="'node-id-' + _config.customizeId(node)"
+        class="mat-tree-node flex items-center justify-between gap-[3px] hover:bg-primary-100 hover:bg-opacity-50"
+      >
+        <div class="flex items-center gap-[3px]">
+          <button
+            (click)="_config.onNodeExpandedChange(node, !_config.customizeIsExpanded(node))"
+            [attr.aria-label]="'Toggle ' + _config.customizeText(node)"
+            mat-icon-button
+            matTreeNodeToggle>
+            <mat-icon class="mat-icon-rtl-mirror text-primary-200">
+              {{ _config.customizeIsExpanded(node) ? 'expand_more' : 'chevron_right' }}
+            </mat-icon>
+          </button>
+
+          @if (_config.withCheckBox) {
+            <mat-checkbox
+              [checked]="_config.customizeIsChecked(node)"
+              (click)="$event.preventDefault(); $event.stopPropagation()"
+              (change)="onNodeCheckedChange(node, $event)">
+            </mat-checkbox>
+          }
+
+          <div class="flex items-center gap-[3px]">
+            <mat-icon [svgIcon]="_config.customizeIcon(node)"></mat-icon>
+            <p [matTooltip]="_config.customizeText(node)"
+               class="truncate max-w-[100px]">{{ _config.customizeText(node) }}</p>
+            <mat-icon
+              class="text-primary"
+              [class.invisible]="!_config.customizeOnHold(node)"
+              [svgIcon]="_config.customizeOnHold(node) ? 'on-hold' : ''">
+            </mat-icon>
+          </div>
+        </div>
+        @if (_config.menuButton && _config.customizeId(selectedNode) === _config.customizeId(node)) {
+          <mat-icon (click)="$event.preventDefault();"
+                    [matMenuTriggerFor]="matMenu"
+                    [matMenuTriggerData]="{item: node}"
+                    class="text-accent menu-toggle-icon"
+                    svgIcon="options">
+          </mat-icon>
+        }
+      </div>
+      <ul [class.app-tree-invisible]="!_config.customizeIsExpanded(node) ">
+        <ng-container matTreeNodeOutlet></ng-container>
+      </ul>
+    </li>
+  </mat-nested-tree-node>
+
+  <mat-menu #matMenu="matMenu">
+
+    <ng-template let-item="item" matMenuContent>
+      @for (matItem of _config.matMenu; track i; let i = $index) {
+        @if (matItem.visible ? matItem.visible(item) : true) {
+          @if (matItem.hidden ? !matItem.hidden(item) : true) {
+            @if (matItem.isMenu) {
+              <organizo-nested-mat-menu [mat-config]="matItem" [item]="item"/>
+            } @else {
+              <button [disabled]="matItem.disabled ? matItem.disabled(item) : false"
+                      (click)="matItem.onClick(item); this.contextNode = null"
+                      [class]="matItem.class || 'flex items-center'" mat-menu-item>
+                @if (matItem?.icon) {
+                  <mat-icon [svgIcon]="matItem.icon"></mat-icon>
+                }
+                {{ matItem.name | translate }}
+              </button>
+            }
+          }
+        }
+      }
+    </ng-template>
+  </mat-menu>
+
+</mat-tree>
+

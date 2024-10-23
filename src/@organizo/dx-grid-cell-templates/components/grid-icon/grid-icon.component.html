@@ -1,0 +1,11 @@
+<div [class.hidden]="hidden()" [matTooltip]="to?.matTooltip" class="flex items-center justify-center">
+  <button
+    #btn
+    (click)="handle($event)"
+    [disabled]="disabled()">
+    {{ to?.label | translate }}
+
+    <mat-icon [color]="btn.disabled ? 'secondary' : 'primary'"
+              [svgIcon]="isFunction(to?.icon) ? to?.icon({cellData, rowData}) : to?.icon"></mat-icon>
+  </button>
+</div>

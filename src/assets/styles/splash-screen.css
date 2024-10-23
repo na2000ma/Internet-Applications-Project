@@ -1,0 +1,90 @@
+body organizo-splash-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @apply bg-default;
+  z-index: 999999;
+  pointer-events: none;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body organizo-splash-screen svg {
+  width: 120px;
+  height: 120px;
+}
+
+body organizo-splash-screen .spinner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 40px;
+  width: 56px;
+}
+
+body organizo-splash-screen .spinner > div {
+  width: 12px;
+  height: 12px;
+  background-color: var(--organizo-primary);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: organizo-bouncedelay 1s infinite ease-in-out both;
+  animation: organizo-bouncedelay 1s infinite ease-in-out both;
+}
+
+body organizo-splash-screen .spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+body organizo-splash-screen .spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes organizo-bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0)
+  }
+  40% {
+    -webkit-transform: scale(1.0)
+  }
+}
+
+@keyframes organizo-bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  40% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
+
+body:not(.organizo-splash-screen-hidden) {
+  overflow: hidden;
+}
+
+body.organizo-splash-screen-hidden organizo-splash-screen {
+  opacity: 0;
+  z-index: -1000000;
+  pointer-events: none;
+}
+
+body.organizo-app-hidden organizo-app {
+  opacity: 0;
+  z-index: -1000000;
+  pointer-events: none;
+}
+
+organizo-app, organizo-splash-screen {
+  transition: all 500ms ease-in-out;
+}

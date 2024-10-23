@@ -1,0 +1,59 @@
+
+:host ::ng-deep .mat-step-icon {
+  display: none !important;
+}
+
+:host ::ng-deep .step-text {
+  @apply truncate max-w-[140px] #{'!important'};
+  flex: 3;
+  font-size: 13px;
+}
+
+:host ::ng-deep .mat-horizontal-stepper-wrapper {
+  gap: 2rem;
+}
+
+:host ::ng-deep .mat-step-label-selected {
+  @apply text-primary-400 #{'!important'};
+  font-weight: 700 !important;
+  font-size: 17px;
+
+  .line {
+    @apply border-b-2 border-b-primary-400 #{'!important'};
+  }
+
+  mat-icon {
+    color: var(--organizo-primary-400) !important;
+  }
+}
+
+:host ::ng-deep .mat-step-label {
+  font-family: Cairo;
+}
+
+:host ::ng-deep .mat-step-header {
+  height: auto;
+}
+
+:host ::ng-deep .mat-stepper-horizontal-line {
+  display: none;
+}
+
+:host ::ng-deep .mat-step-header.cdk-keyboard-focused,
+:host ::ng-deep .mat-step-header.cdk-focused {
+  background: transparent !important;
+}
+
+
+:host ::ng-deep .dialog-content mat-icon {
+  flex: 1;
+}
+
+:host ::ng-deep .mat-horizontal-stepper-header-container {
+  @apply flex justify-around;
+}
+
+mat-icon {
+  @apply text-default #{'!important'};
+}
+

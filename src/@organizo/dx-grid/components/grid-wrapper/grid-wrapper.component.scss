@@ -1,0 +1,280 @@
+:host ::ng-deep {
+  .dx-datagrid-header-panel {
+    border: none !important;
+  }
+
+  input {
+    @apply text-default #{'!important'};
+  }
+
+  .dx-datagrid-search-panel,
+  .dx-toolbar,
+  .dx-button-content {
+    @apply bg-default #{'!important'};
+  }
+
+  .dx-icon {
+    @apply text-default #{'!important'}
+  }
+
+  .dx-datagrid-headers {
+    border: none !important;
+
+    .dx-datagrid-table .dx-row > td {
+      border: none;
+    }
+  }
+
+  .dx-datagrid-rowsview {
+    border: none !important;
+
+    td {
+      border: none !important;
+    }
+  }
+
+  .dx-freespace-row {
+    display: none;
+  }
+
+  .dx-row > td {
+    height: 40px !important;
+  }
+
+  .dx-hidden {
+    display: none;
+  }
+
+  .dx-pages {
+    display: none;
+  }
+
+  .dx-empty {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .dx-datagrid-filter-row {
+    input {
+      text-align: center !important;
+    }
+  }
+
+  .dx-datagrid {
+    font-family: Cairo;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: transparent !important;
+
+
+    .dx-row {
+      // padding: 0;
+      border-bottom: 1px solid var(--organizo-border) !important;
+      border-left: unset !important;
+      border-right: unset !important;
+      padding: 12px;
+    }
+  }
+
+
+  .dx-datagrid-headers {
+    .dx-datagrid-table .dx-row > td {
+
+      @apply text-md font-semibold text-secondary bg-gray-50 #{'!important'};
+      color: var(--organizo-text-secondary);
+    }
+
+    @apply shadow #{'!important'};
+  }
+
+
+  .dx-datagrid-table {
+    width: 100% !important;
+  }
+
+  .dx-datagrid-headers {
+    .dx-datagrid-table .dx-row > td {
+      text-align: center !important;
+    }
+
+  }
+
+  .dx-datagrid-content .dx-datagrid-table .dx-row > td {
+    height: 50px !important;
+    padding: 0 30px !important;
+    vertical-align: middle;
+    text-align: center !important;
+
+  }
+
+  .dx-datagrid-rowsview td {
+    background: white !important;
+    color: var(--organizo-text-default) !important;
+  }
+
+  .dx-scrollable-scroll {
+    height: 0 !important;
+  }
+
+  .grid-fix-width {
+    app-grid-wrapper {
+      dx-data-grid {
+        width: fit-content !important;
+        max-width: none !important;
+      }
+
+      // wrap title only
+      .dx-datagrid-nowrap .dx-header-row > td > .dx-datagrid-text-content {
+        white-space: pre-wrap !important;
+      }
+
+      // wrap title with content
+      .dx-datagrid-nowrap,
+      .dx-datagrid-nowrap .dx-header-row > td > .dx-datagrid-text-content {
+        white-space: pre-wrap !important;
+      }
+    }
+  }
+
+  .grid-fix-width {
+    overflow-x: auto !important;
+  }
+
+  .dx-datagrid-focus-overlay,
+  .dx-menu-item-expanded,
+  .dx-menu-item-content,
+  .dx-context-menu-container-border,
+  .dx-submenu,
+  .dx-loadpanel-content {
+    border: none;
+  }
+
+  .dx-datagrid-focus-overlay {
+    height: fit-content !important;
+  }
+
+  .dx-header-row > td > .dx-datagrid-text-content {
+    color: var(--organizo-text-secondary) !important;
+  }
+
+  .dx-datagrid-content .dx-datagrid-table .dx-data-row .dx-row-alt:hover,
+  .dx-datagrid-content .dx-datagrid-table .dx-data-row:hover {
+
+
+    background-color: var(--gray-100) !important;
+
+    td {
+      background-color: transparent !important;
+    }
+  }
+
+  /*dark style*/
+  .dark {
+    .dx-datagrid {
+      font-family: Cairo;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .dx-datagrid-content .dx-datagrid-table .dx-row {
+      border-bottom-width: 1px;
+    }
+
+    .dx-datagrid-content .dx-datagrid-table .dx-row > td {
+      background: var(--organizo-bg-default) !important;
+
+    }
+
+
+    .dx-datagrid-table {
+      width: 100% !important;
+    }
+
+    .dx-datagrid-headers {
+      .dx-datagrid-table .dx-row > td {
+        text-align: center !important;
+        height: 50px;
+        @apply bg-black bg-opacity-5 #{'!important'};
+      }
+
+      // border: 1px solid var(--organizo-accent) !important;
+    }
+
+    .dx-datagrid-content .dx-datagrid-table .dx-row > td {
+      text-align: center !important;
+    }
+
+    .grid-fix-width {
+      app-grid-wrapper {
+        dx-data-grid {
+          width: fit-content !important;
+          max-width: none !important;
+        }
+
+        // wrap title only
+        .dx-datagrid-nowrap .dx-header-row > td > .dx-datagrid-text-content {
+          white-space: pre-wrap !important;
+        }
+
+        // wrap title with content
+        .dx-datagrid-nowrap,
+        .dx-datagrid-nowrap .dx-header-row > td > .dx-datagrid-text-content {
+          white-space: pre-wrap !important;
+        }
+      }
+    }
+
+    .grid-fix-width {
+      overflow-x: auto;
+    }
+
+    .dx-datagrid-rowsview td {
+      color: white !important;
+    }
+
+    .dx-datagrid-focus-overlay,
+    .dx-menu-item-expanded,
+    .dx-menu-item-content,
+    .dx-context-menu-container-border,
+    .dx-submenu,
+    .dx-loadpanel-content {
+      border: none;
+    }
+
+    .dx-datagrid-content .dx-datagrid-table .dx-data-row .dx-row-alt:hover,
+    .dx-datagrid-content .dx-datagrid-table .dx-data-row:hover {
+
+
+      background-color: var(--organizo-bg-hover) !important;
+
+      td {
+        background-color: transparent !important;
+
+      }
+    }
+
+    .dx-datagrid-filter-row,
+    .dx-editor-cell,
+    .dx-editor-with-menu,
+    .dx-texteditor-input {
+      text-align: center !important;
+      // color: var(--organizo-accent-200);
+      padding-left: 32px;
+    }
+  }
+
+  .dx-datagrid-headers .dx-datagrid-content {
+    margin-bottom: unset !important;
+  }
+
+}
+
+:host ::ng-deep .dx-row .dx-freespace-row .dx-state-invisible {
+  display: none !important;
+}
+
+

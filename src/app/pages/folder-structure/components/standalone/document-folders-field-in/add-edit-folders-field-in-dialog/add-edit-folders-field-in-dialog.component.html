@@ -1,0 +1,38 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    @if (editMode) {
+      {{ 'acce.addFolderFieldIn' | translate }}
+    } @else {
+      {{ 'acce.editFolderFieldIn' | translate }}
+    }
+    <mat-icon (click)="closeDialog()" svgIcon="closeDialog"></mat-icon>
+
+  </div>
+
+  <div class="dialog-content">
+
+    <div class="tree-title flex gap-1">
+      <mat-icon svgIcon="organizo-outline-icons:folder"></mat-icon>
+      <p>Folder tree</p>
+    </div>
+
+    <organizo-tree [config]="treeDef" class="w-full h-full"></organizo-tree>
+  </div>
+
+  <div class="dialog-actions">
+    <button
+      (click)="saveEditDialogData()"
+      color="primary"
+      mat-raised-button
+    >
+      @if (!editMode) {
+        {{ 'app.create' | translate }}
+      } @else {
+        {{ 'app.save' | translate }}
+      }
+    </button>
+    <button (click)="closeDialog()" color="secondary" mat-raised-button type="button">
+      {{ 'app.close' | translate }}
+    </button>
+  </div>
+</div>
