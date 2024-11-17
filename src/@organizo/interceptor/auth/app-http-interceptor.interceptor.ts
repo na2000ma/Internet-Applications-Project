@@ -23,7 +23,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<AppHttpResponse>> {
-    if (req.body && !req.url.includes("login")) req = this.setRequestBody(req);
+    // if (req.url.includes("files")) req = this.setRequestBody(req);
     if (req.url.includes('assets')) {
       return next.handle(req);
     }
@@ -63,7 +63,16 @@ export class AppHttpInterceptor implements HttpInterceptor {
   private setAuthToken(req: HttpRequest<any>, bearerToken: string): HttpRequest<any> {
     return req.clone({
       setHeaders: {
-        Authorization: bearerToken
+        Authorization: `Bearer ${bearerToken}`
+      }
+    });
+  }
+
+  private setCORSHeader(req: HttpRequest<any>): HttpRequest<any> {
+    return req.clone({
+      setHeaders: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
       }
     });
   }

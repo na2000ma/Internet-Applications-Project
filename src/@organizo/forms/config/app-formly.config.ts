@@ -1,6 +1,4 @@
 import {ConfigOption} from "@ngx-formly/core";
-import {RepeatSectionComponent} from "@organizo/forms/components/fields/repeat-section/repeat-section.component";
-import {StepperFieldComponent} from "@organizo/forms/components/fields/stepper-field/stepper-field.component";
 import {AddonsFormlyWrapperComponent} from "@organizo/forms/components/wrappers/addons-formly-wrapper.component";
 import {FormlyFieldInput} from "@ngx-formly/material/input";
 import {FormlyFieldDatepicker} from "@ngx-formly/material/datepicker";
@@ -18,12 +16,6 @@ import {
 import {ColumnWrapperComponent} from "@organizo/forms/components/wrappers/column-wrapper/column-wrapper.component";
 import {RowWrapperComponent} from "@organizo/forms/components/wrappers/row-wrapper/row-wrapper.component";
 import {WrapperTypes} from "@organizo/forms/types/wrapper-types";
-import {
-  SearchableSelectFieldComponent
-} from "@organizo/forms/components/fields/searchable-select-field/searchable-select-field.component";
-import {
-  TreeFormlyFieldComponent
-} from "@organizo/forms/components/fields/tree-formly-field/tree-formly-field.component";
 
 
 export const appFormlyConfig: ConfigOption = {
@@ -86,11 +78,7 @@ export const appFormlyConfig: ConfigOption = {
     {name: FieldTypes.Toggle, component: FormlyFieldToggle},
 
     // Custom Fields
-    {name: FieldTypes.SearchableSelect, component: SearchableSelectFieldComponent},
-    {name: FieldTypes.Stepper, component: StepperFieldComponent},
-    {name: FieldTypes.RepeatSection, component: RepeatSectionComponent},
     {name: FieldTypes.FileUploader, component: FileUploaderFieldComponent},
-    {name: FieldTypes.Tree, component: TreeFormlyFieldComponent},
 
   ],
   wrappers: [

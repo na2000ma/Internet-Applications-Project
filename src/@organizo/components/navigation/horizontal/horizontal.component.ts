@@ -16,13 +16,11 @@ import {OrganizoHorizontalNavigationSpacerItemComponent} from './components/spac
 import {OrganizoNavigationItem} from "@organizo/components/navigation/navigation.types";
 import {OrganizoNavigationService} from "@organizo/components/navigation/navigation.service";
 import {OrganizoUtilsService} from "@organizo/services/utils/organizo-utils.service";
-import {organizoAnimations} from "@organizo/animations/organizo.animations";
 
 @Component({
   selector: 'organizo-horizontal-navigation',
   templateUrl: './horizontal.component.html',
   styleUrls: ['./horizontal.component.scss'],
-  animations: organizoAnimations,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   exportAs: 'organizoHorizontalNavigation',

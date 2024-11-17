@@ -4,6 +4,13 @@
     "creationDate": "Creation Date",
     "modifiedDate": "Modified Date"
   },
+  "groups": {
+    "addGroup": "Add Group",
+    "editGroup": "Edit Group",
+    "myGroups": "My Groups",
+    "join": "Join"
+  },
+
   "auth": {
     "signIn": "Sign In",
     "signUp": "Sign Up",
@@ -55,14 +62,11 @@
     "newFolder": "New Folder",
     "chooseImage": "CHOOSE IMAGE",
     "folderName": "Folder Name",
-    "editFolder": "Edit Folder"
-  },
-  "groups": {
-    "newGroup": "New Group",
-    "updateGroup": "Update Group",
-    "name": "Name",
-    "groupName": "Group Name",
-    "description": "Description"
+    "editFolder": "Edit Folder",
+    "folders": "Folders",
+    "addFile": "Add File",
+    "editFile": "Edit File",
+    "files": "Files"
   },
   "users": {
     "newUser": "New User",

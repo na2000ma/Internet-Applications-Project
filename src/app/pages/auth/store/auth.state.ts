@@ -72,18 +72,13 @@ export class AuthState {
       tap((response: AppHttpResponse) => {
           response.handle(
             (data, extra, headers) => {
-              const authUser = get(data, 'user.user');
-              const userToken = headers.get('Authorization');
+              const authUser = get(data, 'user');
+              const userToken = get(data, 'token');
               this.appService.login(authUser, userToken);
-              if (!get(data, 'user.forceChange')) {
-                this.ngZone.run(() => {
-                  this.router.navigate(['folder-structure', 'home-page'])
-                })
-              } else {
-                this.ngZone.run(() => {
-                  this.router.navigate(['auth', 'reset-password']);
-                })
-              }
+              this.ngZone.run(() => {
+                this.router.navigate(['groups'])
+              })
+
               dispatch(new StartLoaderAction(true));
             },
             (message) => {
@@ -95,7 +90,7 @@ export class AuthState {
               dispatch(new StartLoaderAction(true));
             }
           )
-        dispatch(new StartLoaderAction(false));
+          dispatch(new StartLoaderAction(false));
         }
       )
     )
@@ -134,29 +129,5 @@ export class AuthState {
     patchState({authUser, userToken});
   }
 
-  @Action(GetResetPasswordAction)
-  getResetPasswordAction({dispatch}: StateContext<AuthModel>, {payload}: GetResetPasswordAction) {
-    return this.authService.resetPassword(payload).pipe(
-      tap((response: AppHttpResponse) => {
-          response.handle(
-            (data, extra, headers) => {
-              const authUser = get(data, '1.user');
-              const userToken = headers.get('Authorization');
-              this.appService.login(authUser, userToken);
-              this.ngZone.run(() => {
-                this.router.navigate(['active-directory', 'home-page'])
-              })
-            },
-            (message) => {
-              asapScheduler.schedule(() => dispatch(new ShowFailedToast(message)))
-            },
-            (errors) => {
-              asapScheduler.schedule(() => dispatch(new ShowFailedToast(errors)))
-            }
-          )
-        }
-      )
-    )
-  }
 
 }

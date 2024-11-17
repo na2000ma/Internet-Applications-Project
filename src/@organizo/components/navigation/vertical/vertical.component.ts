@@ -26,7 +26,6 @@ import {
 } from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router'
 import {delay, filter, merge, ReplaySubject, Subject, Subscription, takeUntil} from 'rxjs';
-import {organizoAnimations} from "@organizo/animations/organizo.animations";
 import {
   OrganizoVerticalNavigationAsideItemComponent
 } from "@organizo/components/navigation/vertical/components/aside/aside.component";
@@ -59,7 +58,6 @@ import {OrganizoScrollbarDirective} from "@organizo/directives/scrollbar/scrollb
   selector: 'organizo-vertical-navigation',
   templateUrl: './vertical.component.html',
   styleUrls: ['./vertical.component.scss'],
-  animations: organizoAnimations,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   exportAs: 'organizoVerticalNavigation',

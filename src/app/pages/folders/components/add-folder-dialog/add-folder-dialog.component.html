@@ -1,0 +1,31 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    {{ (editMode ? 'folders.editFile' : 'folders.addFile') | translate }}
+    <mat-icon (click)="closeDialog()" class="svg" svgIcon="closeDialog"></mat-icon>
+  </div>
+
+  <div class="dialog-content">
+    <form (ngSubmit)="submit(formDef.model)" [formGroup]="formDef.group">
+      <formly-form
+        [fields]="formDef.fields"
+        [form]="formDef.group"
+        [model]="formDef.model"
+        [options]="formDef.options"
+      ></formly-form>
+      <button #btn hidden type="submit"></button>
+    </form>
+
+  </div>
+
+  <div class="dialog-actions">
+    <button
+      [disabled]="!formDef.group.valid || editMode"
+      (click)="btn.click()"
+      color="primary"
+      mat-raised-button
+    > {{ (editMode ? 'app.edit' : 'app.create') | translate }}
+    </button>
+
+    <button (click)="closeDialog()" color="secondary" mat-raised-button> {{ 'app.close' | translate }}</button>
+  </div>
+</div>

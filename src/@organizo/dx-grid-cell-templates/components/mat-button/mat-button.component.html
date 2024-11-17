@@ -2,6 +2,7 @@
   <button
     (click)="handleClick($event)"
     [class]="to?.class"
+    [disabled]="disabled()"
     color="primary" mat-raised-button
   >
     {{ to?.label | translate }}

@@ -1,7 +1,3 @@
-/* ----------------------------------------------------------------------------------------------------- */
-/*  @ Import/write your custom styles here.
-/*  @ Styles from this file will override 'vendors.scss' and Organizo's base styles.
-/* ----------------------------------------------------------------------------------------------------- */
 @import '../@organizo/styles/dialog';
 
 
@@ -34,32 +30,6 @@ formly-field-mat-input {
   top: 0;
   z-index: 20;
 }
-
-//// Scroll
-//::-webkit-scrollbar {
-//  width: 12px !important;
-//  @apply bg-gray-300 dark:bg-gray-900 #{'!important'};
-//  border-radius: 3px !important;
-//  transition: all 0.25s linear !important;
-//}
-//
-//::-webkit-scrollbar:hover {
-//  @apply bg-gray-300 dark:bg-gray-900 #{'!important'};
-//}
-//
-//::-webkit-scrollbar-thumb {
-//  border-radius: 3px !important;
-//  @apply bg-gray-900 dark:bg-gray-200 #{'!important'};
-//  transition: all 0.25s linear !important;
-//}
-//
-//::-webkit-scrollbar-thumb:hover {
-//  @apply bg-gray-800 dark:bg-gray-300 #{'!important'};
-//}
-//
-//::-webkit-scrollbar-thumb:active {
-//  @apply bg-gray-800 dark:bg-gray-300 #{'!important'};
-//}
 
 app-grid-wrapper {
   width: -webkit-fill-available !important;

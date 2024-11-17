@@ -4,16 +4,30 @@ export const appNavigationItems: Navigation = {
   default: [
     {
       id: 'organizo',
-      title: 'DMS',
+      title: 'Internet Applications',
       type: 'group',
       children: [
         {
-          id: 'folderStructure',
-          title: 'Folder Structure',
+          id: 'folders',
+          title: 'Folders',
           type: 'basic',
-          icon: 'folder-structure',
-          link: '/folder-structure',
-        }
+          icon: 'folder',
+          link: '/folders',
+        },
+        {
+          id: 'groups',
+          title: 'Groups',
+          type: 'basic',
+          icon: 'group',
+          link: '/groups',
+        },
+        {
+          id: 'users',
+          title: 'Users',
+          type: 'basic',
+          icon: 'user',
+          link: '/users',
+        },
       ]
     }
   ],

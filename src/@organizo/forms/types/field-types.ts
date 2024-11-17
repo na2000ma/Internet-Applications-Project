@@ -16,11 +16,6 @@ export enum FieldTypes {
   Toggle = 'toggle',
 
   // Custom Fields
-  RepeatSection = 'repeat-section',
-  Stepper = 'form-stepper',
   FileUploader = 'file-uploader',
-  DragDrop = 'drag-drop',
-  SearchableSelect = 'searchable-select',
-  Tree = 'tree',
 
 }

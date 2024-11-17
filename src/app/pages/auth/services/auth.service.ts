@@ -17,8 +17,4 @@ export class AuthService {
   logout() {
     return this.httpClient.get(AuthDriverApis.logout)
   }
-
-  resetPassword(payload: any) {
-    return this.httpClient.post(AuthDriverApis.resetPassword, payload)
-  }
 }

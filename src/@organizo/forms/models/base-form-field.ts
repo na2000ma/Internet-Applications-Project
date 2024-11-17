@@ -2,9 +2,7 @@ import {FormlyFieldConfig} from "@ngx-formly/core";
 import {Observable} from "rxjs";
 import {get, set} from "lodash-es";
 import {FieldTypes} from "@organizo/forms/types/field-types";
-import {WrapperTypes} from "@organizo/forms/types/wrapper-types";
 import {FormlyAttributeEvent} from "@ngx-formly/core/lib/models";
-import {StepperStepModel} from "@organizo/forms/components/fields/stepper-field/stepper-field.component";
 import {TranslateService} from "@ngx-translate/core";
 import {inject} from "@organizo/injector/app-injector";
 import {AbstractControl, ValidationErrors} from "@angular/forms";
@@ -296,64 +294,6 @@ export class BaseFormField {
     return this;
   }
 
-  steps(steps: StepperStepModel[]) {
-    set(this.fieldConfig, 'fieldGroup', steps);
-    return this;
-  }
-
-
-  // use this function only in repeat
-
-  viewMode() {
-    set(this.fieldConfig, 'props.viewMode', true)
-    return this
-  }
-
-
-  /**** Added to Use in Form Generator ****/
-  otherInfo(otherInfoPath: string, otherInfoData: any) {
-    set(this.fieldConfig, `props.${otherInfoPath}`, otherInfoData);
-    return this;
-  }
-
-
-  /** Not shared with form generator **/
-  /*** Field Config ***/
-  wrappers(wrappers: WrapperTypes[]): BaseFormField {
-    set(this.fieldConfig, 'wrappers', wrappers);
-    return this;
-  }
-
-  focus(focus: boolean): BaseFormField {
-    set(this.fieldConfig, 'focus', focus);
-    return this;
-  }
-
-  /*** Field Life Cycle ***/
-  onInit(onInit: (field: FormlyFieldConfig) => void | ((field: FormlyFieldConfig) => Observable<any>)): BaseFormField {
-    set(this.fieldConfig, 'hooks.onInit', onInit);
-    return this;
-  }
-
-  onChanges(onChanges: (field: FormlyFieldConfig) => void): BaseFormField {
-    set(this.fieldConfig, 'hooks.onChanges', onChanges);
-    return this;
-  }
-
-  afterContentInit(afterContentInit: (field: FormlyFieldConfig) => void): BaseFormField {
-    set(this.fieldConfig, 'hooks.afterContentInit', afterContentInit);
-    return this;
-  }
-
-  afterViewInit(afterViewInit: (field: FormlyFieldConfig) => void): BaseFormField {
-    set(this.fieldConfig, 'hooks.afterViewInit', afterViewInit);
-    return this;
-  }
-
-  onDestroy(onDestroy: (field?: FormlyFieldConfig) => void): BaseFormField {
-    set(this.fieldConfig, 'hooks.onDestroy', onDestroy);
-    return this;
-  }
 
   /*** Field Props ***/
   pattern(pattern: string | RegExp): BaseFormField {

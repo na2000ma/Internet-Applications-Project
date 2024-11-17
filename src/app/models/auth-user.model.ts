@@ -4,7 +4,5 @@ export interface AuthUser {
   firstName: string;
   lastName: string;
   email: string;
-  organizationUUID: string;
   imagePath: string;
-  role: string;
 }

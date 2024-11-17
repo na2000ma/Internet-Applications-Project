@@ -12,8 +12,6 @@ import {appProvidersConfig} from "@app/app-providers.config";
 import {AppState} from "@app/store/app.state";
 import {AuthState} from "@app/pages/auth/store/auth.state";
 import {CommonModule} from '@angular/common';
-import {LoaderComponent} from "@organizo/components/loader/loader.component";
-import {Loader2Component} from "@organizo/components/loader-2/loader-2.component";
 import {provideNativeDateAdapter} from "@angular/material/core";
 
 @NgModule({
@@ -29,9 +27,7 @@ import {provideNativeDateAdapter} from "@angular/material/core";
     NgxsModule.forRoot([
       AppState,
       AuthState
-    ]),
-    LoaderComponent,
-    Loader2Component
+    ])
   ],
   providers: [appProvidersConfig, provideNativeDateAdapter()],
   bootstrap: [AppComponent]

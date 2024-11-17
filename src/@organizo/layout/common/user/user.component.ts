@@ -8,12 +8,9 @@ import {MatMenuModule} from '@angular/material/menu';
 import {Router} from '@angular/router';
 import {Store} from "@ngxs/store";
 import {AuthState} from "@app/pages/auth/store/auth.state";
-import {PrefixSuffixImagePipe} from "@organizo/pipes/prefix-suffix-image.pipe";
 import {UnsubscribeComponent} from "@shared/components/unsubscribe/unsubscribe.component";
 import {GetLogoutAction} from "@app/pages/auth/store/auth.action";
 import {ObjectUtilsService} from "@organizo/services/utils/object-utils.service";
-import {get} from "lodash-es";
-import {MimeTypes} from "@organizo/dx-grid-cell-templates/components/type-with-icon/type-with-icon.component";
 
 @Component({
   selector: 'user',
@@ -22,7 +19,7 @@ import {MimeTypes} from "@organizo/dx-grid-cell-templates/components/type-with-i
   changeDetection: ChangeDetectionStrategy.OnPush,
   exportAs: 'user',
   standalone: true,
-  imports: [MatButtonModule, MatMenuModule, MatIconModule, NgClass, MatDividerModule, PrefixSuffixImagePipe],
+  imports: [MatButtonModule, MatMenuModule, MatIconModule, NgClass, MatDividerModule],
 })
 export class UserComponent extends UnsubscribeComponent implements OnInit, OnDestroy {
   /* eslint-disable @typescript-eslint/naming-convention */
@@ -50,11 +47,7 @@ export class UserComponent extends UnsubscribeComponent implements OnInit, OnDes
   // -----------------------------------------------------------------------------------------------------
 
   get userImageSource() {
-    return this.objectUtilsService.sanitizeFileByURL(
-      this.objectUtilsService.getURLFromBlob(
-        get(this.objectUtilsService.handleContent(get(this.user, 'imagePath'), MimeTypes.PNG), 'blob')
-      )
-    )
+    return null
   }
 
   /**

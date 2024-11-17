@@ -1,0 +1,24 @@
+<div class="mb-4 flex gap-4 justify-end">
+  <button (click)="back()" class="flex items-center gap-2"
+          color="primary" mat-raised-button>
+    <mat-icon [svgIcon]="'organizo-outline-icons:arrow-long-left'"></mat-icon>
+    {{ 'app.back' | translate }}
+  </button>
+
+  <button (click)="openAddFileDialog()" class="flex items-center gap-2"
+          color="primary" mat-raised-button>
+    <mat-icon [svgIcon]="'organizo-outline-icons:plus'"></mat-icon>
+    {{ 'folders.addFile' | translate }}
+  </button>
+
+</div>
+
+<div class="flex flex-col">
+
+  <organizo-grid-wrapper
+    [config]="gridDef?.gridConfig"
+    [column-config]="gridDef?.gridConfig?.columnsDef"
+    [data-source]="gridDef?.dataSource$"
+  ></organizo-grid-wrapper>
+
+</div>

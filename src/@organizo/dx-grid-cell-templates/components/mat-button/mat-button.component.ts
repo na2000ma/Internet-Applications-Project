@@ -7,6 +7,7 @@ export interface GridMatButtonModel {
   label?: string;
   class?: string;
   onClick: (rowData: any) => void;
+  disabled: (rowData: any) => boolean;
 }
 
 @Component({
@@ -34,5 +35,12 @@ export class MatButtonComponent extends CellTemplateComponent {
       this.to?.onClick(this.rowData)
     }
 
+  }
+
+  disabled() {
+    if (this.to?.disabled) {
+      return this.to?.disabled(this.rowData)
+    }
+    return false;
   }
 }

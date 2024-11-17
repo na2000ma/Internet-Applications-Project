@@ -63,35 +63,9 @@ export class FieldBuilder {
     return new BaseFormField(FieldTypes.Toggle);
   }
 
-  static repeatSection(): BaseFormField {
-    return new BaseFormField(FieldTypes.RepeatSection);
-  }
-
-  static stepper(): BaseFormField {
-    return new BaseFormField(FieldTypes.Stepper);
-  }
 
   static fileUploader(): BaseFormField {
     return new BaseFormField(FieldTypes.FileUploader);
   }
 
-  static dragDrop(): BaseFormField {
-    return new BaseFormField(FieldTypes.DragDrop);
-  }
-
-  static searchableSelect(): BaseFormField {
-    return new BaseFormField(FieldTypes.SearchableSelect);
-  }
-
-  static tree(): BaseFormField {
-    return new BaseFormField(FieldTypes.Tree);
-  }
-
-  // static uploadContent(): BaseFormField {
-  //   return new BaseFormField(FieldTypes.UploadContent);
-  // }
-  //
-  // static dragDrop(): BaseFormField {
-  //   return new BaseFormField(FieldTypes.DragDrop);
-  // }
 }

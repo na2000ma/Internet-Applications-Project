@@ -27,9 +27,19 @@ const routes: Routes = [
         path: '',
         children: [
           {
-            path: 'folder-structure',
-            loadChildren: () => import('@app/pages/folder-structure/folder-structure.module').then(m => m.FolderStructureModule),
-            title: 'Folder Structure'
+            path: 'groups',
+            loadChildren: () => import('@app/pages/groups/groups.module').then(m => m.GroupsModule),
+            title: 'Groups'
+          },
+          {
+            path: 'folders',
+            loadChildren: () => import('@app/pages/folders/folders.module').then(m => m.FoldersModule),
+            title: 'Folders'
+          },
+          {
+            path: 'users',
+            loadChildren: () => import('@app/pages/users/users.module').then(m => m.UsersModule),
+            title: 'Users'
           }
         ]
       }

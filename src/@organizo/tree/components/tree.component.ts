@@ -17,7 +17,6 @@ import {NestedTreeControl} from "@angular/cdk/tree";
 import {MatMenu, MatMenuContent, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {TranslateModule} from "@ngx-translate/core";
 import {UnsubscribeComponent} from "@shared/components/unsubscribe/unsubscribe.component";
-import {organizoAnimations} from "@organizo/animations/organizo.animations";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {get} from "lodash-es";
 import {MatMenuComponent} from "@organizo/dx-grid-cell-templates/components/mat-menu/mat-menu.component";
@@ -51,8 +50,7 @@ import {MatTooltip} from "@angular/material/tooltip";
     MatTooltip
   ],
   templateUrl: './tree.component.html',
-  styleUrl: './tree.component.scss',
-  animations: organizoAnimations
+  styleUrl: './tree.component.scss'
 })
 export class TreeComponent extends UnsubscribeComponent implements AfterViewInit {
   @ViewChild(MatMenu) matMenu: MatMenu;

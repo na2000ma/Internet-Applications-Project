@@ -14,7 +14,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter, Subject, takeUntil} from 'rxjs';
-import {organizoAnimations} from "@organizo/animations/organizo.animations";
 import {
   OrganizoVerticalNavigationBasicItemComponent
 } from "@organizo/components/navigation/vertical/components/basic/basic.component";
@@ -34,7 +33,6 @@ import {OrganizoNavigationService} from "@organizo/components/navigation/navigat
 @Component({
   selector: 'organizo-vertical-navigation-collapsable-item',
   templateUrl: './collapsable.component.html',
-  animations: organizoAnimations,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [NgClass, MatTooltipModule, MatIconModule, OrganizoVerticalNavigationBasicItemComponent, forwardRef(() => OrganizoVerticalNavigationCollapsableItemComponent), OrganizoVerticalNavigationDividerItemComponent, OrganizoVerticalNavigationGroupItemComponent, OrganizoVerticalNavigationSpacerItemComponent],

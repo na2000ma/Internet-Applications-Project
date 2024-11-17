@@ -1,14 +1,25 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {organizoAnimations} from "@organizo/animations/organizo.animations";
 import {BaseFieldComponent} from "@organizo/forms/components/fields/base-field.component";
-import {MimeTypes} from "@organizo/dx-grid-cell-templates/components/type-with-icon/type-with-icon.component";
 import {get} from "lodash-es";
+
+
+export enum MimeTypes {
+  Word = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  Excel = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  PDF = 'application/pdf',
+  Text = 'text/plain',
+  JPEG = 'image/jpeg',
+  PNG = 'image/png',
+  GIF = 'image/gif',
+  BMP = 'image/bmp',
+  TIFF = 'image/tiff',
+  SVG = 'image/svg+xml',
+}
 
 @Component({
   selector: 'app-image-uploader-field',
   templateUrl: './file-uploader-field.component.html',
-  styleUrl: './file-uploader-field.component.scss',
-  animations: organizoAnimations
+  styleUrl: './file-uploader-field.component.scss'
 })
 export class FileUploaderFieldComponent extends BaseFieldComponent implements OnInit {
 
